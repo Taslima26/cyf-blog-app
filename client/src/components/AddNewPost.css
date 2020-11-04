@@ -1,0 +1,19 @@
+.container {
+  
+    justify-content: center;
+    align-items: center;
+    height:100vh;
+    border: 2px solid black;
+    
+
+   
+   
+}
+.form-group{
+    padding: 2%;
+}
+@media (min-width: 1200px) {
+    .container{
+        max-width: 670px;
+    }
+}
