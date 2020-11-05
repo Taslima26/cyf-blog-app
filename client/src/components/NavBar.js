@@ -4,9 +4,9 @@ import "./NavBar.css";
 
 const NavBar = () => {
     return (<div className="navbar">
-      <Link className="nav-tabs" to="/">Home </Link>
-      <Link className="nav-tabs" to="/about">About Us </Link>
-      <Link className="nav-tabs" to="/shop">Shop Now </Link>
+      <Link className="nav-tabs a" to="/">Home </Link>
+      <Link className="nav-tabs a" to="/about">About Us </Link>
+      <Link className="nav-tabs a" to="/shop">Shop Now </Link>
     </div>
       );
 }

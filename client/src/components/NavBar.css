@@ -1,4 +1,4 @@
-.navbar
+ .navbar
 {
     display: flex;
     align-content: flex-end;
@@ -9,8 +9,14 @@
 }
 
 .nav-tabs{
-    color:rgb(237,67,67);
+    
     padding: 1.5rem;
+    color: black;
+    font-weight: 500;
 }
 
-
+.nav-tabs:hover{
+    color: rgb(237,67,67 );
+    font-weight: 500;
+} 
+ 
