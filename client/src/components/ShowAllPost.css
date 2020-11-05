@@ -15,15 +15,14 @@
 .all-blogs-header{
     flex-direction: row;
     align-self: center;
-    color: #ff6500; ;
+     color: rgb(237,67,67);
     
 }
 
 .main-button{
     flex-direction: row;
     align-self: center;
+     background-color: rgb(237,67,67);
 }
-.main-button:hover{
-    background-color: #ff6500;
-}
+
 

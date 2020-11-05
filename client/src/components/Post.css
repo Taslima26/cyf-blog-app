@@ -1,7 +1,7 @@
-.edit-button:hover{
-     background-color: #ff6500;
+.edit-button{
+    background-color:  rgb(237,67,67);
 }
 
-.delete-button:hover{
-     background-color: #ff6500;;
+.delete-button{
+     background-color: rgb(237,67,67);
 }

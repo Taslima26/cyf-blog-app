@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import blog from '../public/Blog-2.jpg';
+import blog from '../public/BLOG-4.jpg';
 import cyf_logo from '../public/cyf_brand.png';
 import './Header.css';
 const Header = () => {

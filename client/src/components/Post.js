@@ -13,10 +13,7 @@ const Post = ({subject,summary,content,author,editPost,deletePost,id}) => {
     <button className="btn  mr-4  btn-info edit-button" onClick={()=>editPost(id)}>Edit</button>
     <button className="btn   btn-info delete-button" onClick={()=>deletePost(id)}>Delete</button>
     </section>
-    </div>
-            
-
-     );
+    </div>);
 }
  
 export default Post;

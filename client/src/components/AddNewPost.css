@@ -11,7 +11,7 @@
    
 }
 .main-header{
-    color:  #ff6500;
+     color: rgb(237,67,67);
 }
 
 
@@ -19,11 +19,10 @@
 .save-button{
     justify-content: center;
     align-self: center;
+    background-color: rgb(237,67,67);
     
 }
-.save-button:hover{
-    background-color: #ff6500;
-}
+
 
 /* .form-group{
     padding: 2%;

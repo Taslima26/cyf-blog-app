@@ -69,7 +69,9 @@
     "helmet": "^3.23.3",
     "morgan": "^1.10.0",
     "pg": "^8.4.1",
-    "react-bootstrap": "^1.4.0"
+    "react-bootstrap": "^1.4.0",
+    "react-router-dom": "^5.2.0",
+    "react-switch": "^5.0.1"
   },
   "engines": {
     "node": "^10 || ^12 || ^14"
