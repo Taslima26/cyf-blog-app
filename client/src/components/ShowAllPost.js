@@ -1,14 +1,19 @@
 import React, { useState, useEffect ,useRef} from 'react';
 import AddNewPost from './AddNewPost';
 import Post from './Post';
+import EditNewPost from './EditNewPost';
+import './ShowAllPost.css';
 
 const ShowAllPost = () => {
     const [subject, setSubject] = useState("");
     const [summary, setSummary] = useState("");
     const [content, setContent] = useState("");
     const [author, setAuthor] = useState("");
-    const [allpost, setAllPost] = useState([]);
+    const [allPost, setAllPost] = useState([]);
     const [isCreateNewPost, setIsCreateNewPost] = useState(false);
+    const [isModifyPost, setIsModifyPost] = useState(false);
+    const [editPostId, setEditPostId] = useState("");
+
 
     const getSubject = useRef();
     const getSummary = useRef();
@@ -34,14 +39,42 @@ const ShowAllPost = () => {
         console.log(author);
     };
     
-    const toggleCreateNewPost = () => {
+    const toggleCreateNewPostComponent = () => {
         setIsCreateNewPost(!isCreateNewPost);
     }
+
+    const toggleEditPostComponent = () => {
+        setIsModifyPost(!isModifyPost);
+    }
+    const editPost = id => {
+        setEditPostId(id);
+        console.log(id);
+        toggleEditPostComponent();
+    }
+    const updatePost = (event) => {
+    event.preventDefault();
+    const updatedPost = allPost.map(post => {
+      if (post.id === editPostId) {
+       
+        return {
+          ...post,
+            subject: subject || post.subject,
+            summary: summary || post.summary,
+            content: content || post.content,
+             author: author || post.author
+        };
+      }
+      console.log(post)
+      return post;
+    });
+    setAllPost(updatedPost);
+    toggleEditPostComponent();
+  };
     const savePost = event => {
         event.preventDefault();
         const id = Date.now();
-        setAllPost([...allpost, { subject, summary, content, author,id }]);
-        console.log(allpost);
+        setAllPost([...allPost, { subject, summary, content, author,id }]);
+       
         setSubject("");
         setSummary("");
         setContent("");
@@ -50,7 +83,7 @@ const ShowAllPost = () => {
          getSummary.current.value = "";
          getContent.current.value = "";
          getAuthor.current.value = "";
-        toggleCreateNewPost();
+        toggleCreateNewPostComponent();
 
     }
     if (isCreateNewPost) {
@@ -71,14 +104,34 @@ const ShowAllPost = () => {
         )
     }
 
-    return (<div>
-        <>
-             <button  className="btn btn-info" onClick={toggleCreateNewPost}>Create New Post</button>
-            <h2>All Blogs</h2>
-            {!allpost.length ?
+    else if (isModifyPost) {
+        const post = allPost.find(post => {
+            return post.id === editPostId;
+        })
+        return (<EditNewPost
+                subject={post.subject}
+                summary={post.summary}
+                content={post.content}
+                author={post.author}
+                updatePost={updatePost}
+                savePostSubject={savePostSubject}
+                savePostSummary={savePostSummary}
+                savePostAuthor={savePostAuthor}
+                savePostContent={savePostContent}
                 
-                (<div><h3>There is no blogs yet!</h3></div>) :
-                allpost.map(eachPost => {
+      />
+    );
+    }
+
+    return (<div className="container-frontpage">
+        <>
+            <h2 className='all-blogs-header'>All Blogs</h2>
+             <button  className="btn btn-info create-new-post btn-sm"  onClick={toggleCreateNewPostComponent}>Create New Post</button>
+            
+            {!allPost.length ?
+                
+                 (<div><h3></h3></div>) :
+                allPost.map(eachPost => {
                     return (
                         <Post
                             id={eachPost.id}
@@ -86,7 +139,8 @@ const ShowAllPost = () => {
                             subject={eachPost.subject}
                             summary={eachPost.summary}
                             content={eachPost.content}
-                            author={eachPost.author}/>
+                            author={eachPost.author}
+                            editPost={editPost}/>
                     )
                 })
             }

@@ -4,16 +4,23 @@
     align-items: center;
     height:100vh;
     border: 2px solid black;
+    margin-top: 1%;
     
 
    
    
 }
-.form-group{
-    padding: 2%;
+.save-button{
+    justify-content: center;
+    align-self: center;
+    
 }
+
+/* .form-group{
+    padding: 2%;
+} */
 @media (min-width: 1200px) {
     .container{
-        max-width: 670px;
+        max-width: 700px;
     }
 }

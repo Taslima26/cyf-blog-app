@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Post = ({subject,summary,content,author}) => {
+const Post = ({subject,summary,content,author,editPost,deletePost,id}) => {
     return ( 
     <div className="container">
     <section>
@@ -9,8 +9,8 @@ const Post = ({subject,summary,content,author}) => {
                 <h6 className="h6 text-center">{author}</h6>
                 <p className="text-center"> {content}</p>
     
-    <button className="btn btn-warning mr-4 ">Edit</button>
-    <button className="btn btn-danger ">Delete</button>
+    <button className="btn btn-warning mr-4 " onClick={()=>editPost(id)}>Edit</button>
+    <button className="btn btn-danger " onClick={()=>deletePost(id)}>Delete</button>
     </section>
     </div>
             

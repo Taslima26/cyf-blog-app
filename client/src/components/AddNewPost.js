@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import ShowAllPost from './ShowAllPost';
-//import "./AddNewPost.css";
+import "./AddNewPost.css";
 const AddNewPost = (props) => {
   
   
   return (
     <>
-    <div className='container border  m-auto'>
+    <div className='container '>
      
       <form onSubmit={props.savePost}>
          <h3 className="h4 text-center">Create new post here </h3>
@@ -26,8 +25,9 @@ const AddNewPost = (props) => {
     <label htmlFor="Subject">Author</label>
     <input type="Author" placeholder="author" onChange={props.savePostAuthor} ref={props.getAuthor} className="form-control"/>
         </div>
-        
-        <button type="button" className="btn btn-secondary form-control " onClick={props.savePost}>Save!</button>
+        <div className="form-group">
+            <button type="button" className="btn btn-info save-button btn-lg" onClick={props.savePost}>Save!</button>
+            </div>
           </form>
       </div>
       </>
