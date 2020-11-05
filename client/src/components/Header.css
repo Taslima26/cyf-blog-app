@@ -1,3 +1,13 @@
-.Image{
-    height: 50 px;
+.image-container{
+    display: flex;
+}
+
+.Image-1{
+   
+    
+    justify-content: center;
+    align-items: center;
+}
+.image-container{
+    display: flex;
 }

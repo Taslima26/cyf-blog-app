@@ -2,6 +2,7 @@ import React, { useState, useEffect ,useRef} from 'react';
 import AddNewPost from './AddNewPost';
 import Post from './Post';
 import EditNewPost from './EditNewPost';
+//import Header from './Header';
 import './ShowAllPost.css';
 
 const ShowAllPost = () => {
@@ -125,12 +126,13 @@ const ShowAllPost = () => {
 
     return (<div className="container-frontpage">
         <>
-            <h2 className='all-blogs-header'>All Blogs</h2>
-             <button  className="btn btn-info create-new-post btn-sm"  onClick={toggleCreateNewPostComponent}>Create New Post</button>
+            
+            <h2 className='all-blogs-header h2 '>Latest Blogs</h2>
+             <button  className="btn btn-info btn-sm main-button"  onClick={toggleCreateNewPostComponent}>Create New Post</button>
             
             {!allPost.length ?
                 
-                 (<div><h3></h3></div>) :
+                 (null) :
                 allPost.map(eachPost => {
                     return (
                         <Post

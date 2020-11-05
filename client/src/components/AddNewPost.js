@@ -8,7 +8,7 @@ const AddNewPost = (props) => {
     <div className='container '>
      
       <form onSubmit={props.savePost}>
-         <h3 className="h4 text-center">Create new post here </h3>
+         <h3 className="h4 text-center main-header">Create new post here </h3>
   <div className="form-group">
     <label htmlFor="Subject">Subject</label>
     <input type="subject" placeholder="subject"  onChange={props.savePostSubject} ref={props.getSubject} className="form-control"/>
