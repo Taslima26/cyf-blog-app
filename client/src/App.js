@@ -20,14 +20,10 @@ import { BrowserRouter as Router} from "react-router-dom";
 
 
 
-function App() {
-    
-	useEffect(() => {
-		
-	}, []);
+const App = () => {
 
   return (
-    <AuthProvider>
+     <AuthProvider>
       <Router>
         <div>
           <PrivateRoute exact path="/" component={Home} />
@@ -35,7 +31,7 @@ function App() {
           <Route exact path="/signup" component={SignUp} />
         </div>
       </Router>
-    </AuthProvider>
+     </AuthProvider>
     
       
 	);

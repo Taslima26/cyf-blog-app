@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import app from './base.js';
+import app from './Base.js';
 
 export const AuthContext = React.createContext();
 export const AuthProvider = ({ children }) => {
