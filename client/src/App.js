@@ -11,37 +11,37 @@ import About from "./Pages/About";
 import TopTenBlog from "./Pages/TopTenBlog";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Home from "./components/Home";
+import Login from './components/Login';
+import SignUp from "./components/SignUp";
+import { AuthProvider } from "./components/Auth";
+import PrivateRoute from "./components/PrivateRoute";
 
-import Registration from "./Pages/Registration";
-import Login from "./Pages/Login";
 
 
-
-
-export function App() {
-	
-
+function App() {
+    
 	useEffect(() => {
 		
 	}, []);
 
-    return (
-        
-        <BrowserRouter>
+  return (
+    <AuthProvider>
+      <BrowserRouter>
         <main>
             
-                <Navbar />
-                
-           
-            <Switch>
-                <Route path="/registration" component={Registration} exact />
-                <Route path="/" component={ShowAllPost}  />
-                <Route path="/about" component={About} />
-                <Route path="/TopTenBlog" component={TopTenBlog} />
-                <Route component={Error} />
-            </Switch>
+        <Navbar />
+        <Switch>
+                     
+            <Route path="/" component={ShowAllPost} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={SignUp} />
+            <Route path="/about" component={About} />
+              <Route path="/TopTenBlog" component={TopTenBlog} />
+             </Switch>
             </main>
-            </BrowserRouter>
+      </BrowserRouter>
+      </AuthProvider>
 		
 	);
 }

@@ -47,6 +47,7 @@ module.exports = merge(common, {
 						variableName: "ReactDOM",
 					},
 				},
+				
 			],
 		}),
 	],
