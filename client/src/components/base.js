@@ -4,12 +4,11 @@ import "firebase/auth";
 
 const app = firebase.default.initializeApp({
  
-  apiKey:process.env.REACT_APP_FIREBASE_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_DOMAIN,
-  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID
-});
+  apiKey: "AIzaSyBV_9U01SrGP2v_Eq8GEkC7hDT3fedd3Zk",
+  authDomain: "cyf-auth-app.firebaseapp.com",
+  databaseURL: "https://cyf-auth-app.firebaseio.com",
+  projectId: "cyf-auth-app",
+  storageBucket: "cyf-auth-app.appspot.com",
+})
 
 export default app;

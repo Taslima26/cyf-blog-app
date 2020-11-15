@@ -1,7 +1,7 @@
-import React, { useCallback } from "react";
-import { withRouter } from "react-router";
-import app from "./Base";
-
+import React, { useState, useEffect, useContext, useCallback } from 'react';
+import { withRouter, Redirect } from "react-router";
+import app from './base';
+import { AuthContext } from "./Auth.js";
 
 const SignUp = ({ history }) => {
   const handleSignUp = useCallback(async event => {
