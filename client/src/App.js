@@ -16,6 +16,7 @@ import Login from './components/Login';
 import SignUp from "./components/SignUp";
 import { AuthProvider } from "./components/Auth";
 import PrivateRoute from "./components/PrivateRoute";
+import { BrowserRouter as Router} from "react-router-dom";
 
 
 
@@ -27,22 +28,16 @@ function App() {
 
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <main>
-            
-        <Navbar />
-        <Switch>
-                     
-            <Route path="/" component={ShowAllPost} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={SignUp} />
-            <Route path="/about" component={About} />
-              <Route path="/TopTenBlog" component={TopTenBlog} />
-             </Switch>
-            </main>
-      </BrowserRouter>
-      </AuthProvider>
-		
+      <Router>
+        <div>
+          <PrivateRoute exact path="/" component={Home} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={SignUp} />
+        </div>
+      </Router>
+    </AuthProvider>
+    
+      
 	);
 }
 
