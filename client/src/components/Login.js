@@ -27,9 +27,10 @@ const Login = ({ history }) => {
   }
 
   return (
-    <div className='container'>
-      <h1 className='h4 text-center main-header'>Log in</h1>
+    <div className='d-flex justify-content-center flex-direction:column'>
+      
       <div className="form-group align-content-center">
+        <h4 className='h4 main-header' >Log in</h4>
         <form onSubmit={handleLogin}>
           <div className="form-group">
         <label>

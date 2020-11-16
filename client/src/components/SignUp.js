@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import { withRouter } from "react-router";
 import app from "./base";
+import './signup.css';
 
 const SignUp = ({ history }) => {
   const handleSignUp = useCallback(async event => {
@@ -17,20 +18,26 @@ const SignUp = ({ history }) => {
   }, [history]);
 
   return (
-    <div>
-      <h1>Sign up</h1>
+     <div className='d-flex justify-content-center flex-direction:column'>
+    <div className="form-group align-content-center" >
+      <h4 className="h4 main-header">Sign up</h4>
       <form onSubmit={handleSignUp}>
+         <div className="form-group">
         <label>
           Email
-          <input name="email" type="email" placeholder="Email" />
-        </label>
+          <input name="email" className='form-control' type="email" placeholder="Email" />
+          </label>
+        </div>
+         <div className="form-group">
         <label>
           Password
-          <input name="password" type="password" placeholder="Password" />
-        </label>
-        <button type="submit">Sign Up</button>
+          <input name="password" className='form-control' type="password" placeholder="Password" />
+          </label>
+          </div>
+        <button type="submit" className="btn login-button save-button btn-lg">Sign Up</button>
       </form>
-    </div>
+      </div>
+      </div>
   );
 };
 
