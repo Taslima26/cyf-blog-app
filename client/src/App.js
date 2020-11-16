@@ -16,24 +16,28 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import { AuthProvider } from "./components/Auth";
 import PrivateRoute from "./components/PrivateRoute";
-import { BrowserRouter as Router} from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+import { HeaderImage } from './public/blog-19.jpg';
 
 
 
 const App = () => {
   return (
- 
+     //<div className="logo" style={{backgroundImage: `url(${HeaderImage}` }}>
+   
     <AuthProvider>
+      <Navbar/>
       <Router>
-        <Navbar/>
-        <div>
+       
+     
          <PrivateRoute exact path="/" component={AddNewPost} />
          <Route exact path="/signup" component={SignUp} />
           <Route exact path="/login" component={Login} />
          
-        </div>
+   
       </Router>
-   </AuthProvider>
+      </AuthProvider>
+   
       
 	);
 }
