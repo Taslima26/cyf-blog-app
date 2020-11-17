@@ -11,7 +11,7 @@ const NavBar = () => {
     <div className="navbar">
    
     <div style={{
-        backgroundImage: `url('/client/src/public/blog-3.jpg')`}}
+        backgroundImage: `url('/client/src/public/BLOG-4.jpg')` ,height:'380px' ,width :'100%'}}
     >
       <img src={logo} style={{ width: 250, marginTop: -7 }} />
       <button onClick={() => app.auth().signOut()}>Sign out</button>

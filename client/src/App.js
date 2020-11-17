@@ -23,6 +23,8 @@ import { HeaderImage } from './public/blog-19.jpg';
 
 const App = () => {
   return (
+
+   
      //<div className="logo" style={{backgroundImage: `url(${HeaderImage}` }}>
    
     <AuthProvider>
@@ -30,7 +32,7 @@ const App = () => {
       <Router>
        
      
-         <PrivateRoute exact path="/" component={AddNewPost} />
+          <PrivateRoute exact path="/" component={ShowAllPost} />
          <Route exact path="/signup" component={SignUp} />
           <Route exact path="/login" component={Login} />
          

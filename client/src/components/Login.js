@@ -45,7 +45,7 @@ const Login = ({ history }) => {
             </label>
             </div>
           <button type="submit" className="btn login-button save-button btn-lg">Log in</button>
-          <h4>New user?<a><href Redirect to={"/login"} /></a></h4>Sign up instead
+          <h4>New user?<a><Redirect to={"/login"} /></a></h4>Sign up instead
       </form>
       </div>
       </div>
