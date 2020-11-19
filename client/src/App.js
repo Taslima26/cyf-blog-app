@@ -7,7 +7,7 @@ import Header from "./components/header";
 import Post from "./components/Post";
 import ShowAllPost from "./components/ShowAllPost";
 import Navbar from "./components/NavBar";
-import About from "./Pages/About";
+import AboutUs from "./Pages/About";
 import TopTenBlog from "./Pages/TopTenBlog";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
@@ -29,15 +29,16 @@ const App = () => {
    
     <AuthProvider>
       <Navbar/>
-      <Router>
+     
        
      
-          <PrivateRoute exact path="/" component={ShowAllPost} />
+          <PrivateRoute exact path="/" component={AddNewPost} />
          <Route exact path="/signup" component={SignUp} />
           <Route exact path="/login" component={Login} />
-         
+      <Route exact path="/about" component={AboutUs} />
+      <Route exact path ="/top-ten-blogs" component={TopTenBlog}/>
    
-      </Router>
+    
       </AuthProvider>
    
       
