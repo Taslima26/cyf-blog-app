@@ -21,8 +21,22 @@ const ShowAllPost = () => {
     const getContent = useRef();
     const getAuthor = useRef();
 
+    
+    // POST request using fetch inside useEffect React hook
+    useEffect(()=>{
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+        
+        };
+        fetch('https://localhost:3100/api/GetTop', requestOptions)
+            .then(response => response.json())
+            .then(data => setAllPost(data));
+
+    },[allPost])
+
      const savePostSubject = event => {
-         setSubject(event.target.value);
+          setSubject(event.target.value);
          console.log(subject);
     };
     const savePostSummary = event => {
@@ -139,10 +153,8 @@ const ShowAllPost = () => {
                             id={eachPost.id}
                             key={eachPost.key}
                             subject={eachPost.subject}
-                            summary={eachPost.summary}
-                            content={eachPost.content}
-                            author={eachPost.author}
-                            editPost={editPost}/>
+                            author={eachPost.author}/>
+                            //editPost={editPost}
                     )
                 })
             }
