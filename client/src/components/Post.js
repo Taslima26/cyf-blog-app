@@ -4,6 +4,7 @@ import './Post.css';
 const Post = ({ title, subTitle, mainContent,  editPost, deletePost, id }) => {
     console.log(title);
     console.log(subTitle);
+    console.log("id from post component",id);
     return ( 
     <div className="container">
     <section>

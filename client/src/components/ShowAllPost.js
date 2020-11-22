@@ -55,13 +55,13 @@ const ShowAllPost = () => {
         setIsCreateNewPost(!isCreateNewPost);
     }
 
-    const toggleEditPostComponent = () => {
+    const toggleModifyPostComponent = () => {
         setIsModifyPost(!isModifyPost);
     }
     const editPost = id => {
         setEditPostId(id);
         console.log(id);
-        toggleEditPostComponent();
+        toggleModifyPostComponent();
     }
     const updatePost = (event) => {
     event.preventDefault();
@@ -80,7 +80,7 @@ const ShowAllPost = () => {
       return post;
     });
     setAllPost(updatedPost);
-    toggleEditPostComponent();
+    toggleModifyPostComponent();
   };
     const savePost =async  event => {
         event.preventDefault();
@@ -125,6 +125,7 @@ const ShowAllPost = () => {
         toggleCreateNewPostComponent();
 
     }
+     console.log("all post before else if edit", allPost);
     
     if (isCreateNewPost) {
         return (
@@ -142,14 +143,16 @@ const ShowAllPost = () => {
         )
     }
 
+
+   
     else if (isModifyPost) {
         const post = allPost.find(post => {
             return post.id === editPostId;
         })
         return (<EditNewPost
-                subject={post.title}
-                summary={post.subTitle}
-                content={post.content}
+                title={post.title}
+                subTitle={post.sub_title}
+                content={post.main_content}
                 updatePost={updatePost}
                 savePostTitle={savePostTitle}
                 savePostSubTitle={savePostSubTitle}
@@ -176,6 +179,7 @@ const ShowAllPost = () => {
                             title={eachPost.title}
                             subTitle={eachPost.sub_title}
                             mainContent={eachPost.main_content}
+                            id={eachPost.id}
 
                             editPost={editPost}/>
                     )
