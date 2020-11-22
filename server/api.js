@@ -60,7 +60,7 @@ router.get("/getblog/:id", function (req, res) {
 });
 
 //update blogs
-router.put("/updateblog", function (req, res) {
+router.put("/updateblog/", function (req, res) {
 	const id = req.body.id;
 	const newTitle = req.body.title;
 	const newSubTitle = req.body.sub_title;
@@ -76,7 +76,7 @@ router.put("/updateblog", function (req, res) {
 });
 
 //delete blogs
-router.delete("/deleteblog", (req, res) => {
+router.delete("/deleteblog/:id", (req, res) => {
 	const id = req.body.id;
 	const query="delete from blog_article where id=$1"
 	Connection.query(query, [id]).

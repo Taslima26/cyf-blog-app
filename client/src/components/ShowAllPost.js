@@ -1,4 +1,4 @@
-import React, { useState, useEffect ,useRef} from 'react';
+import React, { useState, useEffect ,useRef,Fragment} from 'react';
 import AddNewPost from './AddNewPost';
 import Post from './Post';
 import EditNewPost from './EditNewPost';
@@ -58,6 +58,8 @@ const ShowAllPost = () => {
     const toggleModifyPostComponent = () => {
         setIsModifyPost(!isModifyPost);
     }
+
+    
     const editPost = id => {
         setEditPostId(id);
         console.log(id);
@@ -125,7 +127,22 @@ const ShowAllPost = () => {
         toggleCreateNewPostComponent();
 
     }
-     console.log("all post before else if edit", allPost);
+    console.log("all post before else if edit", allPost);
+    
+    const deletePost = async(id) => {
+        try {
+            const deletedata = await fetch(`http://localhost:3100/api/deleteblog/${id}`,{
+                method:"DELETE"
+            })
+           // console.log(allPost.filter(blog=>blog.id));
+            setAllPost(allPost.filter(blog => blog.id !== id));
+            console.log(deletedata);
+           
+            
+        } catch (error) {
+            console.error(error.message);
+        }
+    }
     
     if (isCreateNewPost) {
         return (
@@ -142,10 +159,9 @@ const ShowAllPost = () => {
 
         )
     }
+    
 
-
-   
-    else if (isModifyPost) {
+else if (isModifyPost) {
         const post = allPost.find(post => {
             return post.id === editPostId;
         })
@@ -161,12 +177,13 @@ const ShowAllPost = () => {
       />
     );
     }
-    console.log(allPost);
+
+      console.log(allPost);
     return (<div className="container-frontpage">
-        <>
+        <Fragment>
             
             <h2 className='all-blogs-header h2 '>Latest Blogs</h2>
-             <button  className="btn btn-info btn-sm main-button"  onClick={toggleCreateNewPostComponent}>Create New Post</button>
+             <button  className="btn btn-sm main-button"  style={{backgroundColor:'rgb(237,67,67)',color:'white'}} onClick={toggleCreateNewPostComponent}>Create New Post</button>
            
             {!allPost.length ?
                 
@@ -180,13 +197,13 @@ const ShowAllPost = () => {
                             subTitle={eachPost.sub_title}
                             mainContent={eachPost.main_content}
                             id={eachPost.id}
-
-                            editPost={editPost}/>
+                            deletePost={deletePost}
+                            editPost={editPost} />
                     )
                 })
             }
            
-        </>
+        </Fragment>
         
     </div>  );
 }

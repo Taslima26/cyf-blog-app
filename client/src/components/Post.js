@@ -13,8 +13,8 @@ const Post = ({ title, subTitle, mainContent,  editPost, deletePost, id }) => {
                 <p className="h6 text-center">{mainContent}</p>
                
     
-    <button className="btn  mr-4  btn-info edit-button" onClick={()=>editPost(id)}>Edit</button>
-    <button className="btn   btn-info delete-button" onClick={()=>deletePost(id)}>Delete</button>
+    <button className="btn  mr-4 " style={{backgroundColor:'rgb(237,67,67)',color:'white'}} onClick={()=>editPost(id)}>Edit</button>
+    <button className="btn  delete-button"style={{backgroundColor:'rgb(237,67,67)',color:'white'}} onClick={()=>deletePost(id)}>Delete</button>
     </section>
     </div>);
 }
