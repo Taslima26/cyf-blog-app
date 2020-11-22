@@ -4,55 +4,52 @@ import Post from './Post';
 import EditNewPost from './EditNewPost';
 //import Header from './Header';
 import './ShowAllPost.css';
+import axios from 'axios';
 
 const ShowAllPost = () => {
-    const [subject, setSubject] = useState("");
-    const [summary, setSummary] = useState("");
+    const [title, setTitle] = useState("");
+    const [subTitle, setSubTitle] = useState("");
     const [content, setContent] = useState("");
-    const [author, setAuthor] = useState("");
     const [allPost, setAllPost] = useState([]);
     const [isCreateNewPost, setIsCreateNewPost] = useState(false);
     const [isModifyPost, setIsModifyPost] = useState(false);
     const [editPostId, setEditPostId] = useState("");
 
 
-    const getSubject = useRef();
-    const getSummary = useRef();
+    const getTitle = useRef();
+    const getsubTitle = useRef();
     const getContent = useRef();
-    const getAuthor = useRef();
+    
 
     
     // POST request using fetch inside useEffect React hook
     useEffect(()=>{
         const requestOptions = {
-            method: 'POST',
+            method: 'GET',
             headers: { 'Content-Type': 'application/json' },
         
         };
-        fetch('https://localhost:3100/api/GetTop', requestOptions)
+        fetch('http://localhost:3100/api/getall', requestOptions)
             .then(response => response.json())
             .then(data => setAllPost(data));
 
-    },[allPost])
-
-     const savePostSubject = event => {
-          setSubject(event.target.value);
-         console.log(subject);
+    }, [])
+     
+     const savePostTitle = event => {
+          setTitle(event.target.value);
+       //  console.log(title);
     };
-    const savePostSummary = event => {
-        setSummary(event.target.value);
+    const savePostSubTitle = event => {
+        setSubTitle(event.target.value);
         //console.log(event.target);
-        console.log(summary);
+        //console.log(subTitle);
   };
   const savePostContent = event => {
       setContent(event.target.value);
-      console.log(content);
+     // console.log(content);
     };
     
-    const savePostAuthor = event => {
-        setAuthor(event.target.value);
-        console.log(author);
-    };
+    
     
     const toggleCreateNewPostComponent = () => {
         setIsCreateNewPost(!isCreateNewPost);
@@ -73,10 +70,10 @@ const ShowAllPost = () => {
        
         return {
           ...post,
-            subject: subject || post.subject,
-            summary: summary || post.summary,
+            title: title || post.title,
+            summary: subTitle || post.subTitle,
             content: content || post.content,
-             author: author || post.author
+             
         };
       }
       console.log(post)
@@ -85,34 +82,60 @@ const ShowAllPost = () => {
     setAllPost(updatedPost);
     toggleEditPostComponent();
   };
-    const savePost = event => {
+    const savePost =async  event => {
         event.preventDefault();
-        const id = Date.now();
-        setAllPost([...allPost, { subject, summary, content, author,id }]);
+        try {
+            console.log("from save post", title);
+            console.log("allPost from savePost", subTitle);
+            //const body=  setAllPost([...allPost, { title, sub_title,main_content }]);
+           // console.log("body from save post", { body })
+            const body={
+                    title:  title ,
+                    sub_title: subTitle ,
+                    main_content:  content 
+
+            }
+            console.log("body before save post", body);
+            const response = await fetch("http://localhost:3100/api/addblog", {
+                method: "POST",
+                headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+                 },
+               body: JSON.stringify(body)
+            })
+             console.log("from save post",response);
+        }
        
-        setSubject("");
-        setSummary("");
+        catch (err) {
+            console.error(err);
+        }
+   
+
+      
+       
+        setTitle("");
+        setSubTitle("");
         setContent("");
-        setAuthor("");
-         getSubject.current.value = "";
-         getSummary.current.value = "";
+        
+         getTitle.current.value = "";
+         getsubTitle.current.value = "";
          getContent.current.value = "";
-         getAuthor.current.value = "";
+         
         toggleCreateNewPostComponent();
 
     }
+    
     if (isCreateNewPost) {
         return (
             <>
                 <AddNewPost
-                    savePostSubject={savePostSubject}
-                    savePostSummary={savePostSummary}
-                    savePostAuthor={savePostAuthor}
+                    savePostTitle={savePostTitle}
+                    savePostSubTitle={savePostSubTitle}
                     savePostContent={savePostContent}
-                    getSubject={getSubject}
-                    getSummary={getSummary}
+                    getTitle={getTitle}
+                    getsubTitle={getsubTitle}
                     getContent={getContent}
-                    getAuthor={getAuthor}
                     savePost={savePost} />
                 </>
 
@@ -124,37 +147,37 @@ const ShowAllPost = () => {
             return post.id === editPostId;
         })
         return (<EditNewPost
-                subject={post.subject}
-                summary={post.summary}
+                subject={post.title}
+                summary={post.subTitle}
                 content={post.content}
-                author={post.author}
                 updatePost={updatePost}
-                savePostSubject={savePostSubject}
-                savePostSummary={savePostSummary}
-                savePostAuthor={savePostAuthor}
+                savePostTitle={savePostTitle}
+                savePostSubTitle={savePostSubTitle}
                 savePostContent={savePostContent}
                 
       />
     );
     }
-
+    console.log(allPost);
     return (<div className="container-frontpage">
         <>
             
             <h2 className='all-blogs-header h2 '>Latest Blogs</h2>
              <button  className="btn btn-info btn-sm main-button"  onClick={toggleCreateNewPostComponent}>Create New Post</button>
-            
+           
             {!allPost.length ?
                 
                  (null) :
                 allPost.map(eachPost => {
                     return (
                         <Post
-                            id={eachPost.id}
-                            key={eachPost.key}
-                            subject={eachPost.subject}
-                            author={eachPost.author}/>
-                            //editPost={editPost}
+                            
+                            key={eachPost.id}
+                            title={eachPost.title}
+                            subTitle={eachPost.sub_title}
+                            mainContent={eachPost.main_content}
+
+                            editPost={editPost}/>
                     )
                 })
             }

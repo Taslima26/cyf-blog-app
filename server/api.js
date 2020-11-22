@@ -11,21 +11,21 @@ router.use(bodyParser.json());
 var cors = require("cors");
 router.use(cors());
 //get latest 10 articles
-router.get("/GetLatest", function (req, res) {
+router.get("/getlatest", function (req, res) {
   Connection
     .query("SELECT * FROM blog_article ORDER BY create_on_date limit 10")
     .then((result) => res.json(result.rows))
     .catch((e) => console.error(e));
 });
 //show all articles
-router.get("/GetAll", function (req, res) {
+router.get("/getall", function (req, res) {
   Connection
     .query("SELECT * FROM blog_article ORDER BY create_on_date")
     .then((result) => res.json(result.rows))
     .catch((e) => console.error(e));
 });
 //get top 10 articles
-router.get("/GetTop", function (req, res) {
+router.get("/gettop", function (req, res) {
   Connection
     .query("select ba.*, (select count(1) from blog_review br where br.article_id=ba.id) as Num_Likes from blog_article ba order by Num_likes limit 10"
 )
@@ -34,7 +34,7 @@ router.get("/GetTop", function (req, res) {
 });
 
 //create new blog
-router.post("/AddBlog", function(req, res)  {
+router.post("/addblog", function(req, res)  {
 	const newTitle = req.body.title;
 	const newSubTitle = req.body.sub_title;
 	const mainContent = req.body.main_content;
@@ -50,7 +50,7 @@ router.post("/AddBlog", function(req, res)  {
 
 
 //get specific blog by an id
-router.get("/GetBlog/:id", function (req, res) {
+router.get("/getblog/:id", function (req, res) {
   const BlogId = req.params.id;
 
   Connection
@@ -60,7 +60,7 @@ router.get("/GetBlog/:id", function (req, res) {
 });
 
 //update blogs
-router.put("/UpdateBlog", function (req, res) {
+router.put("/updateblog", function (req, res) {
 	const id = req.body.id;
 	const newTitle = req.body.title;
 	const newSubTitle = req.body.sub_title;
@@ -76,7 +76,7 @@ router.put("/UpdateBlog", function (req, res) {
 });
 
 //delete blogs
-router.delete("/delete", (req, res) => {
+router.delete("/deleteblog", (req, res) => {
 	const id = req.body.id;
 	const query="delete from blog_article where id=$1"
 	Connection.query(query, [id]).

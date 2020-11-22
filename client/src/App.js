@@ -28,11 +28,12 @@ const App = () => {
      //<div className="logo" style={{backgroundImage: `url(${HeaderImage}` }}>
    
     <AuthProvider>
+      
       <Navbar/>
      
        
      
-          <PrivateRoute exact path="/" component={ShowAllPost} />
+          <Route exact path="/" component={ShowAllPost} />
          <Route exact path="/signup" component={SignUp} />
           <Route exact path="/login" component={Login} />
       <Route exact path="/about" component={AboutUs} />
