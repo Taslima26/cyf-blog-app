@@ -60,33 +60,44 @@ router.get("/getblog/:id", function (req, res) {
 });
 
 //update blogs
-router.put("/updateblog/", function (req, res) {
-	const id = req.body.id;
-	const newTitle = req.body.title;
-	const newSubTitle = req.body.sub_title;
-	const mainContent = req.body.main_content;
-	//user shouldn't update userId
+// router.put("/updateblog/:id", function (req, res) {
+// 	const id = req.body.params;
+// 	const newTitle = req.body.title;
+// 	const newSubTitle = req.body.sub_title;
+// 	const mainContent = req.body.main_content;
+// 	//user shouldn't update userId
 	
-	//checking if the user is existed in our github table
-	const query="update blog_article set title= $1, sub_title=$2, main_content =$3 where id=$4"
-	Connection.query(query, [newTitle, newSubTitle, mainContent, id]).
-		then(() => res.send("blog updated")).
-		catch((e) => console.error(e));
+// 	//checking if the user is existed in our github table
+// 	const query="update blog_article set title= $1, sub_title=$2, main_content =$3 where id=$4"
+// 	Connection.query(query, [newTitle, newSubTitle, mainContent]).
+// 		then(() => res.send("blog updated")).
+// 		catch((e) => console.error(e));
 	
+// });
+
+router.put("/updateblog/:id", function (req, res) {
+  const id = req.params.id;
+	
+		const newTitle = req.body.title;
+		const newSubTitle = req.body.sub_title;
+	 	const newMainContent = req.body.main_content;
+
+
+  Connection
+    .query("UPDATE blog_article SET title=$1 ,sub_title=$2,main_content=$3 WHERE id=$4", [newTitle,newSubTitle,newMainContent,id])
+    .then(() => res.send(`Customer ${id} updated!`))
+    .catch((e) => console.error(e));
 });
 
-//delete blogs
-router.delete("/deleteblog/:id", (req, res) => {
-	const id = req.body.id;
-	const query="delete from blog_article where id=$1"
-	Connection.query(query, [id]).
-		then(() => res.send("blog updated")).
-		catch((e) => console.error(e));
-	
-	
-})
 
+router.delete("/deleteblog/:id", function (req, res) {
+  const id = req.params.id;
 
+  Connection
+    .query("DELETE FROM blog_article WHERE id=$1", [id])
+    .then(() => res.send(`Blog ${id} deleted!`))
+    .catch((e) => console.error(e));
+});
 
 
 

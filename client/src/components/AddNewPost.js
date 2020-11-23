@@ -19,14 +19,33 @@ const AddNewPost = (props) => {
         </div>
         <div className="form-group">
     <label htmlFor="exampleFormControlTextarea1">Blog Content</label>
-    <textarea className="form-control" placeholder="content"input type="text" onChange={props.savePostContent} ref={props.getContent} id="exampleFormControlTextarea1" rows="4"></textarea>
+    <textarea className="form-control" placeholder="content"input type="text"  onChange={props.savePostContent} ref={props.getContent} id="exampleFormControlTextarea1" rows="4"></textarea>
         </div>
         
         <div className="form-group">
-            <button style= {{backgroundColor:'rgb(237,67,67)' ,color:'white'}}type="button" className="save-button btn btn-large" onClick={props.savePost}>Save!</button>
+            <button style= {{backgroundColor:'rgb(237,67,67)' ,color:'white'}}type="button" className="save-button btn btn-large" onClick={props.savePost} data-toggle="modal" data-target="#myModal">Save!</button>
             </div>
           </form>
       </div>
+      <div className="modal fade" id="myModal" role="dialog">
+    <div className="modal-dialog">
+    
+     {/* Modal content */}
+      <div className="modal-content">
+        <div className="modal-header">
+          <button type="button" className="close" data-dismiss="modal">&times;&times;</button>
+          <h4 className="modal-title" style={{color:'rgb(237,67,67)'}}>Blog created</h4>
+        </div>
+        <div className="modal-body">
+          <p>Blogs sucessfully saved.</p>
+        </div>
+        <div className="modal-footer">
+          <button type="button" className="btn"  style= {{backgroundColor:'rgb(237,67,67)' ,color:'white'}} data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
       </Fragment>
     ); 
 }

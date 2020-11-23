@@ -15,7 +15,7 @@ const NavBar = () => {
     >
       <img src={logo} style={{ width: 250, marginTop: -7 }} />
       <button onClick={() => app.auth().signOut()}>Sign out</button>
-      <Link className="nav-tabs a" to="/ShowAllPost">Home </Link>
+      <Link className="nav-tabs a" to="/">Home </Link>
       <Link className="nav-tabs a" to ="/SignUp">SignUp</Link> 
       <Link className="nav-tabs a" to="/about">About Us </Link>
       <Link className="nav-tabs a" to="/top-ten-blogs">Top 10 Blogs </Link>

@@ -24,7 +24,7 @@ const ShowAllPost = () => {
     
     // POST request using fetch inside useEffect React hook
     useEffect(()=>{
-        const requestOptions = {
+     const requestOptions = {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
         
@@ -65,25 +65,63 @@ const ShowAllPost = () => {
         console.log(id);
         toggleModifyPostComponent();
     }
-    const updatePost = (event) => {
-    event.preventDefault();
-    const updatedPost = allPost.map(post => {
-      if (post.id === editPostId) {
+    const updatePost = async (event) => {
+        event.preventDefault();
+        try{
+        const response = await fetch(`http://localhost:3100/api/updateblog/${event.currentTarget.id}`, {
+                        method: "PUT",
+                        headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                           
+                            title:title,
+                            sub_title:subTitle,
+                            main_content: content
+                        })
+                       
+        // }).then(response => response.json())
+        //     .then(result => {
+        //         console.log("result", result),
+        //             setAllPost({result})
+            })
+             console.log(response);
+            console.log(Post); 
+            // const updatedPost = allPost.map(post => {
+    //   if (post.id === editPostId) {
        
-        return {
-          ...post,
-            title: title || post.title,
-            summary: subTitle || post.subTitle,
-            content: content || post.content,
+    //     return {
+    //       ...post,
+    //         title: title || post.title,
+    //         summary: subTitle || post.subTitle,
+    //         content: content || post.content,
              
-        };
+    //     };
+            
+                }
+
+            
+        // )
+        // }
+    
+        catch (err) {
+            console.error(err.message);
+        }
+    // const updatedPost = allPost.map(post => {
+    //   if (post.id === editPostId) {
+       
+    //     return {
+    //       ...post,
+    //         title: title || post.title,
+    //         summary: subTitle || post.subTitle,
+    //         content: content || post.content,
+             
+    //     };
       }
-      console.log(post)
-      return post;
-    });
-    setAllPost(updatedPost);
-    toggleModifyPostComponent();
-  };
+    //   console.log(post)
+    //   return post;
+    // });
+//    
+//     
+//   };
     const savePost =async  event => {
         event.preventDefault();
         try {
@@ -161,10 +199,13 @@ const ShowAllPost = () => {
     }
     
 
-else if (isModifyPost) {
+    else if (isModifyPost) {
+        console.log("from else if")
         const post = allPost.find(post => {
+        
             return post.id === editPostId;
         })
+      
         return (<EditNewPost
                 title={post.title}
                 subTitle={post.sub_title}
@@ -172,7 +213,8 @@ else if (isModifyPost) {
                 updatePost={updatePost}
                 savePostTitle={savePostTitle}
                 savePostSubTitle={savePostSubTitle}
-                savePostContent={savePostContent}
+            savePostContent={savePostContent}
+            id={post.id}
                 
       />
     );
