@@ -18,6 +18,8 @@ import { AuthProvider } from "./components/Auth";
 import PrivateRoute from "./components/PrivateRoute";
 import { BrowserRouter as Router } from "react-router-dom";
 import { HeaderImage } from './public/blog-19.jpg';
+import { BlogContextProvider } from "./Contex/Context";
+import EditNewPost from "./components/EditNewPost";
 
 
 
@@ -26,21 +28,22 @@ const App = () => {
 
    
      //<div className="logo" style={{backgroundImage: `url(${HeaderImage}` }}>
-   
+   <BlogContextProvider>
     <AuthProvider>
       
       <Navbar/>
-     
-       
-     
-          <Route exact path="/" component={ShowAllPost} />
-         <Route exact path="/signup" component={SignUp} />
-          <Route exact path="/login" component={Login} />
-      <Route exact path="/about" component={AboutUs} />
+     <Route exact path="/" component={ShowAllPost} />
+      <Route exact path="/signup" component={SignUp} />
+      <Route exact path="/login" component={Login} />
+        <Route exact path="/about" component={AboutUs} />
+        <Route exact path="/ShowAllPost/:id/EditNewPost"
+              component={EditNewPost}
+            />
       <Route exact path ="/top-ten-blogs" component={TopTenBlog}/>
    
     
       </AuthProvider>
+      </BlogContextProvider>
    
       
 	);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Post.css';
 
-const Post = ({ title, subTitle, mainContent,  editPost, deletePost, id }) => {
+const Post = ({ title, subTitle, mainContent,  editPost, deletePost, id,handleUpdate }) => {
     console.log(title);
     console.log(subTitle);
     console.log("id from post component",id);
@@ -13,7 +13,7 @@ const Post = ({ title, subTitle, mainContent,  editPost, deletePost, id }) => {
                 <p className="h6 text-center">{mainContent}</p>
                
     
-    <button className="btn  mr-4 " style={{backgroundColor:'rgb(237,67,67)',color:'white'}} onClick={()=>editPost(id)}>Edit</button>
+    <button className="btn  mr-4 " style={{backgroundColor:'rgb(237,67,67)',color:'white'}} onClick={()=>handleUpdate(id)}>Edit</button>
     <button className="btn  delete-button"style={{backgroundColor:'rgb(237,67,67)',color:'white'}} onClick={()=>deletePost(id)}>Delete</button>
     </section>
     </div>);

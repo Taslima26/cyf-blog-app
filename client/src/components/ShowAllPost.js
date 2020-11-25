@@ -5,6 +5,7 @@ import EditNewPost from './EditNewPost';
 //import Header from './Header';
 import './ShowAllPost.css';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const ShowAllPost = () => {
     const [title, setTitle] = useState("");
@@ -19,21 +20,33 @@ const ShowAllPost = () => {
     const getTitle = useRef();
     const getsubTitle = useRef();
     const getContent = useRef();
+    let history = useHistory();
     
 
     
-    // POST request using fetch inside useEffect React hook
-    useEffect(()=>{
-     const requestOptions = {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
+    //POST request using fetch inside useEffect React hook
+    // useEffect(()=>{
+    //  const requestOptions = {
+    //         method: 'GET',
+    //         headers: { 'Content-Type': 'application/json' },
         
-        };
-        fetch('http://localhost:3100/api/getall', requestOptions)
-            .then(response => response.json())
-            .then(data => setAllPost(data));
+    //     };
+    //     fetch('http://localhost:3100/api/getall', requestOptions)
+    //         .then(response => response.json())
+    //         .then(data => setAllPost(data));
 
-    }, [])
+    // }, [])
+    // console.log(allPost);
+
+    useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios(`http://localhost:3100/api/getall`,)
+      setAllPost(response.data.data.blogs)
+    }
+    fetchData();
+    
+  },
+  [])
      
      const savePostTitle = event => {
           setTitle(event.target.value);
@@ -65,9 +78,14 @@ const ShowAllPost = () => {
         console.log(id);
         toggleModifyPostComponent();
     }
+
+    const handleUpadte = (id) => {
+        history.push(`/ShowAllPost/${id}/EditNewPost`)
+    }
     const updatePost = async (event) => {
         event.preventDefault();
-        try{
+        try {
+            
         const response = await fetch(`http://localhost:3100/api/updateblog/${event.currentTarget.id}`, {
                         method: "PUT",
                         headers: { "Content-Type": "application/json" },
@@ -103,7 +121,7 @@ const ShowAllPost = () => {
         // }
     
         catch (err) {
-            console.error(err.message);
+            console.error(`${err.code } ${err.message}`);
         }
     // const updatedPost = allPost.map(post => {
     //   if (post.id === editPostId) {
@@ -213,14 +231,15 @@ const ShowAllPost = () => {
                 updatePost={updatePost}
                 savePostTitle={savePostTitle}
                 savePostSubTitle={savePostSubTitle}
-            savePostContent={savePostContent}
+                savePostContent={savePostContent}
+                    handleUpadte={handleUpadte}
             id={post.id}
                 
       />
     );
     }
 
-      console.log(allPost);
+      console.log(allPost.blogs);
     return (<div className="container-frontpage">
         <Fragment>
             
@@ -240,7 +259,8 @@ const ShowAllPost = () => {
                             mainContent={eachPost.main_content}
                             id={eachPost.id}
                             deletePost={deletePost}
-                            editPost={editPost} />
+                            editPost={editPost}
+                            handleUpdate={handleUpadte}/>
                     )
                 })
             }

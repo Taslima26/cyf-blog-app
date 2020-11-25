@@ -1,13 +1,12 @@
 
 import { Router } from "express";
+const express = require("express");
+
 import { Connection } from "./db";
 const bodyParser = require("body-parser");
-const router = new Router();
-
-
-router.use(bodyParser.json());
-
-
+//const router = new Router();
+const router = express();
+router.use(express.json())
 var cors = require("cors");
 router.use(cors());
 //get latest 10 articles
@@ -18,12 +17,28 @@ router.get("/getlatest", function (req, res) {
     .catch((e) => console.error(e));
 });
 //show all articles
-router.get("/getall", function (req, res) {
-  Connection
-    .query("SELECT * FROM blog_article ORDER BY create_on_date")
-    .then((result) => res.json(result.rows))
-    .catch((e) => console.error(e));
-});
+// router.get("/getall", function (req, res) {
+//   Connection
+//     .query("SELECT * FROM blog_article ORDER BY create_on_date")
+//     .then((result) => res.json(result.rows))
+//     .catch((e) => console.error(e));
+// });
+
+router.get("/getall", async (req, res) => {
+  try {
+   const result= await Connection.query("SELECT * FROM blog_article ORDER BY create_on_date")
+    res.status(200).json({
+      status: "success",
+      data: {
+        blogs: result.rows,
+       
+      },
+    })
+  }
+  catch (err) {
+    console.log(err);
+  }
+})
 //get top 10 articles
 router.get("/gettop", function (req, res) {
   Connection
@@ -33,61 +48,67 @@ router.get("/gettop", function (req, res) {
     .catch((e) => console.error(e));
 });
 
-//create new blog
-router.post("/addblog", function(req, res)  {
-	const newTitle = req.body.title;
-	const newSubTitle = req.body.sub_title;
-	const mainContent = req.body.main_content;
-	const userId = req.body.user_id;
-	
-	//checking if the user is existed in our github table
-	const query="insert into blog_article (title, sub_title, main_content,user_id,create_on_date) values ($1,$2,$3,$4,current_date)"
-	Connection.query(query, [newTitle, newSubTitle, mainContent, userId]).
-		then(() => res.send("blog created")).
-		catch((e) => console.error(e));
-	
+router.post("/addblog", async (req, res) => {
+  try{
+    const results =  await Connection.query("Insert into blog_article(title,sub_title,main_content) values ($1,$2,$3) returning *", [req.body.title, req.body.sub_title, req.body.main_content])
+    console.log(results);
+    res.status(201).json({
+      status: "sucess",
+      data: {
+        blog: results.rows[0]
+      }
+      
+    })
+  }
+  catch (err)
+  {
+    console.log(err)
+  }
+})
+
+
+
+router.get("/getblog/:id", async (req, res) => {
+  try {
+    const result= await Connection.query(
+      "select * from blog_article  where id = $1",
+      [req.params.id]
+    );
+    res.status(200).json({
+      status: "success",
+      data: {
+        blog:result.rows[0],
+       
+      },
+    });
+   
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 
-//get specific blog by an id
-router.get("/getblog/:id", function (req, res) {
-  const BlogId = req.params.id;
+router.put("/updateblog/:id", async (req, res) => {
+  try {
+    const results = await Connection.query(
+      "UPDATE blog_article SET title = $1, sub_title = $2, main_content = $3 where id = $4 returning *",
+      [req.body.title, req.body.sub_title, req.body.main_content, req.params.id]
+    );
 
-  Connection
-    .query("SELECT * FROM blog_article WHERE id=$1", [BlogId])
-    .then((result) => res.json(result.rows))
-    .catch((e) => console.error(e));
+    res.status(200).json({
+      status: "success",
+      data: {
+        blogs: results.rows[0],
+      },
+    });
+    console.log(req.body)
+  } catch (err) {
+    console.log(err);
+  }
+  console.log(req.params.id);
+  console.log(req.body);
 });
 
-//update blogs
-// router.put("/updateblog/:id", function (req, res) {
-// 	const id = req.body.params;
-// 	const newTitle = req.body.title;
-// 	const newSubTitle = req.body.sub_title;
-// 	const mainContent = req.body.main_content;
-// 	//user shouldn't update userId
-	
-// 	//checking if the user is existed in our github table
-// 	const query="update blog_article set title= $1, sub_title=$2, main_content =$3 where id=$4"
-// 	Connection.query(query, [newTitle, newSubTitle, mainContent]).
-// 		then(() => res.send("blog updated")).
-// 		catch((e) => console.error(e));
-	
-// });
-
-router.put("/updateblog/:id", function (req, res) {
-  const id = req.params.id;
-	
-		const newTitle = req.body.title;
-		const newSubTitle = req.body.sub_title;
-	 	const newMainContent = req.body.main_content;
-
-
-  Connection
-    .query("UPDATE blog_article SET title=$1 ,sub_title=$2,main_content=$3 WHERE id=$4", [newTitle,newSubTitle,newMainContent,id])
-    .then(() => res.send(`Customer ${id} updated!`))
-    .catch((e) => console.error(e));
-});
 
 
 router.delete("/deleteblog/:id", function (req, res) {
