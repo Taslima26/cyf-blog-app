@@ -7,9 +7,6 @@ const EditNewPost = (props) => {
   const [title, setTitle] = useState("");
   const [subTitle, setSubTitle] = useState("");
   const [content, setContent] = useState("");
-
-  // console.log("sub title from edit post", subTitle);
-  // console.log("content from edit post", content);
   const {id} = useParams();
   console.log(id);
   console.log("id from edit new post", id);
@@ -33,7 +30,7 @@ const EditNewPost = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const updatedRestaurants = await axios.put(`http://localhost:3100/api/updateblog/${id}`, {
+    const updatedBlogs = await axios.put(`http://localhost:3100/api/updateblog/${id}`, {
       title: title,
       sub_title: subTitle,
       main_content:content

@@ -1,6 +1,4 @@
 import React, { Fragment, useEffect, useState } from "react";
-
-
 import "./App.css";
 import AddNewPost from "./components/AddNewPost";
 import Header from "./components/header";
@@ -18,7 +16,7 @@ import { AuthProvider } from "./components/Auth";
 import PrivateRoute from "./components/PrivateRoute";
 import { BrowserRouter as Router } from "react-router-dom";
 import { HeaderImage } from './public/blog-19.jpg';
-import { BlogContextProvider } from "./Contex/Context";
+import { BlogsContextProvider } from "./Contex/BlogsContext"
 import EditNewPost from "./components/EditNewPost";
 
 
@@ -28,7 +26,7 @@ const App = () => {
 
    
      //<div className="logo" style={{backgroundImage: `url(${HeaderImage}` }}>
-   <BlogContextProvider>
+   <BlogsContextProvider>
     <AuthProvider>
       
       <Navbar/>
@@ -43,7 +41,7 @@ const App = () => {
    
     
       </AuthProvider>
-      </BlogContextProvider>
+      </BlogsContextProvider>
    
       
 	);
