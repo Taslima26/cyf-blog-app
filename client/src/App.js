@@ -36,7 +36,8 @@ const App = () => {
         <Route exact path="/about" component={AboutUs} />
         <Route exact path="/ShowAllPost/:id/EditNewPost"
               component={EditNewPost}
-            />
+        />
+        <Route exact path="/AddNewPost" component={AddNewPost}/>
       <Route exact path ="/top-ten-blogs" component={TopTenBlog}/>
    
     

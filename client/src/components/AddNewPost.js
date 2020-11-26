@@ -1,34 +1,66 @@
-import React, { useState, useEffect ,Fragment} from 'react';
+import React, { useState, useEffect, Fragment, useRef, useContext } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import "./AddNewPost.css";
+import { BlogsContext } from '../Contex/BlogsContext';
+import client from '../api';
 
 
-const AddNewPost = (props) => {
+const AddNewPost = () => {
+  let history = useHistory();
+  const [title, setTitle] = useState("");
+  const [subTitle, setSubTitle] = useState("");
+  const [content, setContent] = useState("");
+  const getTitle = useRef();
+  const getsubTitle = useRef();
+  const getContent = useRef();
+  //let history = useHistory();
+  const { blogs, setBlogs,addBlogs } = useContext(BlogsContext);
   
-  
+  const savePost = async(event)=>{
+        event.preventDefault();
+        try {
+           const response= await client.post("/addblog", {
+                title: title,
+                sub_title: subTitle,
+                main_content: content
+            })
+            console.log(response);
+            addBlogs(response.data.data.blog);
+          history.push("/");
+         
+        } catch (error) {
+            console.log(error.message);
+        }
+        
+  }
+  const goToAllPost = () => {
+    history.push(`/`)
+  }
+   
   return (
     <Fragment>
     <div className='container '>
      
-      <form onSubmit={props.savePost} className="mt-5">
+      <form onSubmit={savePost} className="mt-5">
           <h3 className="h4 text-center main-header">Create new post here </h3>
           
         <div className="form-group">
         <label htmlFor="Subject">Subject</label>
-        <input type="text" placeholder="subject"  onChange={props.savePostTitle} ref={props.getTitle} className="form-control" required/>
+            <input type="text" placeholder="Title" id="title" value={title} onChange={(e) => setTitle(e.target.value)} ref={getTitle} className="form-control" required/>
         </div>
         
         <div className="form-group">
         <label htmlFor="Subject">Summary</label>
-        <input type="text" placeholder="summary" onChange={props.savePostSubTitle} ref={props.getsubTitle} className="form-control" required/>
+            <input type="text" id="subTitle" placeholder="Sub-title" value={subTitle} onChange={(e) => setSubTitle(e.target.value)} ref={getsubTitle} className="form-control" required/>
         </div>
         
         <div className="form-group">
         <label htmlFor="exampleFormControlTextarea1">Blog Content</label>
-        <textarea className="form-control" placeholder="content"input type="text"  onChange={props.savePostContent} ref={props.getContent} id="exampleFormControlTextarea1" rows="4" required></textarea>
+        <textarea className="form-control" placeholder="content"input type="text" value={content} onChange={(e)=>setContent(e.target.value)} ref={getContent} id="exampleFormControlTextarea1" rows="4" required></textarea>
         </div>
         
         <div className="form-group">
-            <button style= {{backgroundColor:'rgb(237,67,67)' ,color:'white'}}type="button" className="save-button btn btn-large" onClick={props.savePost} data-toggle="modal" data-target="#myModal">Save!</button>
+            <button style= {{backgroundColor:'rgb(237,67,67)' ,color:'white'}}type="button" className="save-button btn btn-large" onClick={savePost} data-toggle="modal" data-target="#myModal">Save!</button>
             </div>
           </form>
       </div>
@@ -45,7 +77,7 @@ const AddNewPost = (props) => {
           <p>Blogs sucessfully saved.</p>
         </div>
         <div className="modal-footer">
-          <button type="button" className="btn"  style= {{backgroundColor:'rgb(237,67,67)' ,color:'white'}} data-dismiss="modal">Close</button>
+              <button type="button" className="btn" onClick={goToAllPost} style= {{backgroundColor:'rgb(237,67,67)' ,color:'white'}} data-dismiss="modal">Close</button>
         </div>
       </div>
       

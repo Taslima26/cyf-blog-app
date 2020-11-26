@@ -1,9 +1,8 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import axios from 'axios';
 import client from '../api';
 
-const EditNewPost = (props) => {
+const EditNewPost = () => {
   let history = useHistory();
   const [title, setTitle] = useState("");
   const [subTitle, setSubTitle] = useState("");
@@ -47,7 +46,7 @@ const EditNewPost = (props) => {
         <form action="">
   <div className="form-group">
     <label htmlFor="Subject">Subject</label>
-            <input  id="name" type="text" className="form-control" value={title} onChange={(e)=>setTitle(e.target.value)}  />
+            <input  id="title" type="text" className="form-control" value={title} onChange={(e)=>setTitle(e.target.value)}  />
         </div>
         <div className="form-group">
     <label htmlFor="Subject">Summary</label>
