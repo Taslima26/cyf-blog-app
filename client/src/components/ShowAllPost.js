@@ -5,6 +5,8 @@ import EditNewPost from './EditNewPost';import './ShowAllPost.css';
 import { useHistory } from 'react-router-dom';
 import client from '../api';
 import { BlogsContext } from '../Contex/BlogsContext';
+import Card from './Card';
+
 
 
 const ShowAllPost = (props) => {
@@ -57,16 +59,17 @@ const ShowAllPost = (props) => {
                  (null) :
                 blogs.map(eachPost => {
                     return (
-                        <Post
-                            
-                            key={eachPost.id}
-                            title={eachPost.title}
-                            subTitle={eachPost.sub_title}
+                        <Card key={eachPost.id}
+                             title={eachPost.title}
+                                subTitle={eachPost.sub_title}
                             mainContent={eachPost.main_content}
-                            id={eachPost.id}
+                             id={eachPost.id}
                             deletePost={deletePost}
                             
                             handleUpdate={handleUpadte}/>
+                            
+                        
+                        
                     )
                 })
             }
