@@ -1,8 +1,7 @@
 import React, { useState, useEffect ,useRef,Fragment, useContext} from 'react';
 import AddNewPost from './AddNewPost';
 import Post from './Post';
-import EditNewPost from './EditNewPost';
-import './ShowAllPost.css';
+import EditNewPost from './EditNewPost';import './ShowAllPost.css';
 import { useHistory } from 'react-router-dom';
 import client from '../api';
 import { BlogsContext } from '../Contex/BlogsContext';
@@ -89,18 +88,14 @@ const ShowAllPost = (props) => {
      }
     console.log("all post before else if edit", allPost);
     
-    const deletePost = async(id) => {
+    const deletePost = async (id) => {
         try {
-            const deletedata = await fetch(`http://localhost:3100/api/deleteblog/${id}`,{
-                method:"DELETE"
-            })
-           // console.log(allPost.filter(blog=>blog.id));
-            setAllPost(allPost.filter(blog => blog.id !== id));
-            console.log(deletedata);
-           
+            const response = await client.delete(`/deleteblog/${id}`)
+            setBlogs(blogs.filter(blog=>blog.id!==id))
+            console.log(response)
             
         } catch (error) {
-            console.error(error.message);
+            console.log(error.message);
         }
     }
     

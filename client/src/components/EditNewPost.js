@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
+import client from '../api';
 
 const EditNewPost = (props) => {
   let history = useHistory();
@@ -13,7 +14,7 @@ const EditNewPost = (props) => {
   
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios (`http://localhost:3100/api/getblog/${id}`,)
+      const response = await client.get(`/getblog/${id}`,)
       console.log(response);
       console.log(response.data.data.blog.sub_title);
       console.log(response.data.data.blog.title);
@@ -30,7 +31,7 @@ const EditNewPost = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const updatedBlogs = await axios.put(`http://localhost:3100/api/updateblog/${id}`, {
+    const updatedBlogs = await client.put(`http://localhost:3100/api/updateblog/${id}`, {
       title: title,
       sub_title: subTitle,
       main_content:content
