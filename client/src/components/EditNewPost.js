@@ -14,10 +14,6 @@ const EditNewPost = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await client.get(`/getblog/${id}`,)
-      console.log(response);
-      console.log(response.data.data.blog.sub_title);
-      console.log(response.data.data.blog.title);
-      console.log(response.data.data.blog.main_content);
       setTitle(response.data.data.blog.title)
       setSubTitle(response.data.data.blog.sub_title)
       setContent(response.data.data.blog.main_content)

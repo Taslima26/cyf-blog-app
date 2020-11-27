@@ -18,7 +18,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { HeaderImage } from './public/blog-19.jpg';
 import { BlogsContextProvider } from "./Contex/BlogsContext"
 import EditNewPost from "./components/EditNewPost";
-
+import DetailBlog from "./components/DetailBlog";
 
 
 const App = () => {
@@ -38,7 +38,8 @@ const App = () => {
               component={EditNewPost}
         />
         <Route exact path="/AddNewPost" component={AddNewPost}/>
-      <Route exact path ="/top-ten-blogs" component={TopTenBlog}/>
+        <Route exact path="/top-ten-blogs" component={TopTenBlog} />
+        <Route exact path="/ShowAllPost/:id" component={DetailBlog}/>
    
     
       </AuthProvider>

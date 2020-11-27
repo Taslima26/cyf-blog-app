@@ -76,6 +76,7 @@
     "firebase": "^8.0.2",
     "fontsource-roboto": "^3.0.3",
     "helmet": "^3.23.3",
+    "moment": "^2.29.1",
     "morgan": "^1.10.0",
     "pg": "^8.4.1",
     "react-bootstrap": "^1.4.0",

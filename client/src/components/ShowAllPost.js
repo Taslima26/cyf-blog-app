@@ -45,6 +45,9 @@ const ShowAllPost = (props) => {
         history.push(`/AddNewPost`)
     }
     
+    const handleGoToDetailsPage = (id) => {
+        history.push(`/ShowAllPost/${id}`)
+    }
     
     const deletePost = async (id) => {
         try {
@@ -81,7 +84,7 @@ const ShowAllPost = (props) => {
             <Typography className={classes.buttonColor} variant="h3" gutterBottom>
         All Blogs!!!
       </Typography>
-             <Fab variant="extended" className={classes.buttonColor}>
+             <Fab variant="extended" className={classes.buttonColor} onClick={handleCreate}>
         Create a Blog.
       </Fab>
         <div className={classes.root}>
@@ -97,8 +100,10 @@ const ShowAllPost = (props) => {
                      title={tile.title}
                      subTitle={tile.sub_title}
                      mainContent={tile.main_content}
+                     createdOnDate={tile.create_on_date}
                      deletePost={deletePost}
                      handleUpdate={handleUpadte}
+                     handleGoToDetailsPage={handleGoToDetailsPage}
                 />
         ))}
                     </GridList>

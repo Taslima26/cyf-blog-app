@@ -2,6 +2,7 @@
 import { Router } from "express";
 const express = require("express");
 
+
 import { Connection } from "./db";
 const bodyParser = require("body-parser");
 //const router = new Router();
@@ -9,6 +10,8 @@ const router = express();
 router.use(express.json())
 var cors = require("cors");
 router.use(cors());
+var moment = require('moment'); // require
+moment().format(); 
 //get latest 10 articles
 router.get("/getlatest", function (req, res) {
   Connection
@@ -49,8 +52,10 @@ router.get("/gettop", function (req, res) {
 });
 
 router.post("/addblog", async (req, res) => {
-  try{
-    const results =  await Connection.query("Insert into blog_article(title,sub_title,main_content) values ($1,$2,$3) returning *", [req.body.title, req.body.sub_title, req.body.main_content])
+  try {
+    let todaysDate = moment();
+    console.log(todaysDate);
+    const results =  await Connection.query("Insert into blog_article(title,sub_title,main_content,create_on_date) values ($1,$2,$3,$4) returning *", [req.body.title, req.body.sub_title, req.body.main_content,todaysDate.format('YYYY-MM-DD')])
     console.log(results);
     res.status(201).json({
       status: "sucess",
