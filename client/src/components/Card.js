@@ -40,7 +40,7 @@ export default function OutlinedCard({ title, subTitle, mainContent, createdOnDa
   const bull = <span className={classes.bullet}>•</span>;
 
   return (
-    <Card className={classes.root} variant="elevated" m={2} pt={3}>
+    <Card className={classes.root} variant="outlined" m={2} pt={3}>
       <CardContent>
         <Typography className={classes.title} className={classes.buttonColor} gutterBottom>
          {title}
