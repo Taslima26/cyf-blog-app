@@ -61,20 +61,20 @@ const ShowAllPost = (props) => {
         }
     }
     const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-evenly',
-   // overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper,
-   // flexDirection: 'row',
-     alignContent: 'space-around',
+//   root: {
+//     display: 'flex',
+//     flexWrap: 'wrap',
+//     justifyContent: 'space-evenly',
+//    // overflow: 'hidden',
+//     backgroundColor: theme.palette.background.paper,
+//    // flexDirection: 'row',
+//      alignContent: 'space-around',
     
-  },
-  gridList: {
-    width: 4000,
-    height: 2000,
-        },
+//   },
+//   gridList: {
+//     width: 4000,
+//     height: 2000,
+//         },
   buttonColor: {
       color:'#ed4343',
         },
@@ -93,17 +93,12 @@ const ShowAllPost = (props) => {
             <Typography className={classes.buttonColor} variant="h3" gutterBottom>
         All Blogs!!!
       </Typography>
-                <Button className={classes.buttonColor} variant="outlined" color="primary" onClick={handleCreate}>
+                <Button className={classes.buttonColor} size="small"variant="contained" color="primary" onClick={handleCreate}>
   Create a blog!!
 </Button>
                 </Container>
-        <div className={classes.root}>
+         <div className={classes.root}>
             
-            
-                <Grid container spacing={4}>
-          
-                <Grid container justify="center">
-             <GridList className={classes.gridList} cols={3}>
              {blogs.map((tile) => (
         
                  <Card id={tile.id}
@@ -116,9 +111,7 @@ const ShowAllPost = (props) => {
                      handleGoToDetailsPage={handleGoToDetailsPage}
                 />
         ))}
-                    </GridList>
-                        </Grid>
-                        </Grid>
+                    
                     
                    
             </div>
