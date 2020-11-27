@@ -14,6 +14,7 @@ import container from '@material-ui/core/Container';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Fab from '@material-ui/core/Fab';
+import Button from '@material-ui/core/Button';
 
 
 
@@ -76,17 +77,26 @@ const ShowAllPost = (props) => {
         },
   buttonColor: {
       color:'#ed4343',
+        },
+        alignHeader: {
+            display: "flex",
+            alignContent:'space-evenly',
+        },
+         buttonMargin: {    
+            margin: '30px',   
   },
     }));
     const classes = useStyles();
     return (
-            <Container>
+        <Container>
+            <Container className={classes.alignHeader}>
             <Typography className={classes.buttonColor} variant="h3" gutterBottom>
         All Blogs!!!
       </Typography>
-             <Fab variant="extended" className={classes.buttonColor} onClick={handleCreate}>
-        Create a Blog.
-      </Fab>
+                <Button className={classes.buttonColor} variant="outlined" color="primary" onClick={handleCreate}>
+  Create a blog!!
+</Button>
+                </Container>
         <div className={classes.root}>
             
             
