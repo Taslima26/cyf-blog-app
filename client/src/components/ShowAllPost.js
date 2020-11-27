@@ -6,6 +6,15 @@ import { useHistory } from 'react-router-dom';
 import client from '../api';
 import { BlogsContext } from '../Contex/BlogsContext';
 import Card from './Card';
+import GridList from '@material-ui/core/GridList';
+import Grid from '@material-ui/core/Grid';
+import GridListTile from '@material-ui/core/GridListTile';
+import { makeStyles } from '@material-ui/core/styles';
+import container from '@material-ui/core/Container';
+import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
+import Fab from '@material-ui/core/Fab';
+
 
 
 
@@ -47,36 +56,64 @@ const ShowAllPost = (props) => {
             console.log(error.message);
         }
     }
+    const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-evenly',
+   // overflow: 'hidden',
+    backgroundColor: theme.palette.background.paper,
+   // flexDirection: 'row',
+     alignContent: 'space-around',
     
-    return (<div className="container-frontpage">
-        <Fragment>
+  },
+  gridList: {
+    width: 4000,
+    height: 2000,
+        },
+  buttonColor: {
+      color:'#ed4343',
+  },
+    }));
+    const classes = useStyles();
+    return (
+            <Container>
+            <Typography className={classes.buttonColor} variant="h3" gutterBottom>
+        All Blogs!!!
+      </Typography>
+             <Fab variant="extended" className={classes.buttonColor}>
+        Create a Blog.
+      </Fab>
+        <div className={classes.root}>
             
-            <h2 className='all-blogs-header h2 '>Latest Blogs</h2>
-             <button  className="btn btn-sm main-button"  style={{backgroundColor:'rgb(237,67,67)',color:'white'}} onClick={handleCreate}>Create New Post</button>
-           
-            {!blogs.length ?
-                
-                 (null) :
-                blogs.map(eachPost => {
-                    return (
-                        <Card key={eachPost.id}
-                             title={eachPost.title}
-                                subTitle={eachPost.sub_title}
-                            mainContent={eachPost.main_content}
-                             id={eachPost.id}
-                            deletePost={deletePost}
-                            
-                            handleUpdate={handleUpadte}/>
-                            
-                        
-                        
-                    )
-                })
-            }
-           
-        </Fragment>
+            
+                <Grid container spacing={4}>
+          
+                <Grid container justify="center">
+             <GridList className={classes.gridList} cols={3}>
+             {blogs.map((tile) => (
         
-    </div>  );
+                 <Card id={tile.id}
+                     title={tile.title}
+                     subTitle={tile.sub_title}
+                     mainContent={tile.main_content}
+                     deletePost={deletePost}
+                     handleUpdate={handleUpadte}
+                />
+        ))}
+                    </GridList>
+                        </Grid>
+                        </Grid>
+                    
+                   
+            </div>
+
+   </Container>
+                
+           
+       
+        
+  );
 }
  
 export default ShowAllPost;

@@ -38,7 +38,7 @@ export default function OutlinedCard({ title, subTitle, mainContent, editPost, d
   const bull = <span className={classes.bullet}>•</span>;
 
   return (
-    <Card className={classes.root} variant="outlined">
+    <Card className={classes.root} variant="elevated" m={2} pt={3}>
       <CardContent>
         <Typography className={classes.title} className={classes.buttonColor} gutterBottom>
          {title}
@@ -47,9 +47,9 @@ export default function OutlinedCard({ title, subTitle, mainContent, editPost, d
           {subTitle}
         </Typography>
         
-        <Typography variant="body2" component="p">
+        {/* <Typography variant="body2" component="p">
           {mainContent}
-        </Typography>
+        </Typography> */}
       </CardContent>
       <CardActions>
               <Button size="small" variant="outlined" className={classes.buttonColor}>Learn More</Button>
