@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -10,6 +10,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import Grid from "@material-ui/core"
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+
 
 
 
@@ -38,6 +39,7 @@ export default function OutlinedCard({ title, subTitle, mainContent, createdOnDa
   console.log(createdOnDate);
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
+    
 
   return (
     <Card className={classes.root} variant="outlined" m={2} pt={3}>
@@ -50,7 +52,7 @@ export default function OutlinedCard({ title, subTitle, mainContent, createdOnDa
         </Typography>
         
         <Typography variant="body2" component="p">
-         Created on {createdOnDate} by Taslima
+         Created on {createdOnDate} 
         </Typography>
         
       </CardContent>

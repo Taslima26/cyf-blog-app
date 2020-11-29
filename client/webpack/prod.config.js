@@ -1,6 +1,8 @@
 const HtmlWebpackTagsPlugin = require("html-webpack-tags-plugin");
 const path = require("path");
 const { merge } = require("webpack-merge");
+const Dotenv = require('dotenv-webpack');
+
 
 const common = require("./common.config");
 
@@ -48,7 +50,10 @@ module.exports = merge(common, {
 					},
 				},
 				
+    			new Dotenv()
+  
 			],
+			
 		}),
 	],
 });

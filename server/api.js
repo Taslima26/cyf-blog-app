@@ -12,6 +12,11 @@ var cors = require("cors");
 router.use(cors());
 var moment = require('moment'); // require
 moment().format(); 
+const FormData = require("form-data");
+const fetch = require("node-fetch");
+router.use(bodyParser.json({ type: "text/*" }));
+router.use(bodyParser.urlencoded({ extended: false }));
+
 //get latest 10 articles
 router.get("/getlatest", function (req, res) {
   Connection
@@ -123,6 +128,47 @@ router.delete("/deleteblog/:id", function (req, res) {
     .query("DELETE FROM blog_article WHERE id=$1", [id])
     .then(() => res.send(`Blog ${id} deleted!`))
     .catch((e) => console.error(e));
+});
+
+router.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
+
+router.post("/authenticate", (req, res) => {
+  console.log(process.env);
+  const { client_id, redirect_uri, client_secret, code } = req.body;
+
+  const data = new FormData();
+  data.append("client_id", client_id);
+  data.append("client_secret", client_secret);
+  data.append("code", code);
+  data.append("redirect_uri", redirect_uri);
+
+  // Request to exchange code for an access token
+  fetch(`https://github.com/login/oauth/access_token`, {
+    method: "POST",
+    body: data
+  })
+    .then(response => response.text())
+    .then(paramsString => {
+      let params = new URLSearchParams(paramsString);
+      const access_token = params.get("access_token");
+      const scope = params.get("scope");
+      const token_type = params.get("token_type");
+
+      // Request to return data of a user that has been authenticated
+      return fetch(
+        `https://api.github.com/user?access_token=${access_token}&scope=${scope}&token_type=${token_type}`
+      );
+    })
+    .then(response => response.json())
+    .then(response => {
+      return res.status(200).json(response);
+    })
+    .catch(error => {
+      return res.status(400).json(error);
+    });
 });
 
 

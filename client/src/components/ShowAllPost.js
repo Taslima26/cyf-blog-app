@@ -1,6 +1,5 @@
 import React, { useState, useEffect ,useRef,Fragment, useContext} from 'react';
 import AddNewPost from './AddNewPost';
-import Post from './Post';
 import EditNewPost from './EditNewPost';import './ShowAllPost.css';
 import { useHistory } from 'react-router-dom';
 import client from '../api';
@@ -22,7 +21,9 @@ import Button from '@material-ui/core/Button';
 const ShowAllPost = (props) => {
 
     let history = useHistory();
-    const { blogs, setBlogs,addBlogs } = useContext(BlogsContext);
+    const { blogs, setBlogs, addBlogs } = useContext(BlogsContext);
+  
+    
     
     useEffect(() => {
         const fetchData = async () => {
@@ -93,7 +94,7 @@ const ShowAllPost = (props) => {
             <Typography className={classes.buttonColor} variant="h3" gutterBottom>
         All Blogs!!!
       </Typography>
-                <Button className={classes.buttonColor} size="small"variant="contained" color="primary" onClick={handleCreate}>
+                <Button className={classes.buttonColor} size="small"variant="contained"  onClick={handleCreate}>
   Create a blog!!
 </Button>
                 </Container>

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "./NavBar.css";
 import logo from '../public/cyf_brand.png';
 import { Navbar, Header, Brand } from 'react-bootstrap';
-import app from "./base";
 import blog from "../public/download.jpg"
 
 const NavBar = () => {
@@ -14,7 +13,6 @@ const NavBar = () => {
         backgroundImage: `url('/client/src/public/BLOG-4.jpg')` ,height:'380px' ,width :'100%'}}
     >
       <img src={logo} style={{ width: 250, marginTop: -7 }} />
-      <button onClick={() => app.auth().signOut()}>Sign out</button>
       <Link className="nav-tabs a" to="/">Home </Link>
       <Link className="nav-tabs a" to ="/SignUp">SignUp</Link> 
       <Link className="nav-tabs a" to="/about">About Us </Link>
