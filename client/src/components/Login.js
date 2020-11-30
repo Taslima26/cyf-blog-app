@@ -5,28 +5,23 @@ import GithubIcon from "mdi-react/GithubIcon";
 import { AuthContext } from "../App";
 
 
-
-
 export default function Login() {
   const { state, dispatch } = useContext(AuthContext);
   const [data, setData] = useState({ errorMessage: "", isLoading: false });
-  console.log("state from login",state)
 
   const { client_id, redirect_uri } = state;
-  console.log(redirect_uri);
-  console.log("AuthContext",AuthContext)
+  console.log(state);
+
   useEffect(() => {
     // After requesting Github access, Github redirects back to your app with a code parameter
     const url = window.location.href;
     console.log(url);
-
     const hasCode = url.includes("?code=");
     console.log(hasCode);
 
     // If Github API returns the code parameter
     if (hasCode) {
       const newUrl = url.split("?code=");
-      console.log(newUrl);
       window.history.pushState({}, null, newUrl[0]);
       setData({ ...data, isLoading: true });
 
@@ -36,10 +31,9 @@ export default function Login() {
         client_secret: state.client_secret,
         code: newUrl[1]
       };
-
       console.log(requestData);
       const proxy_url = state.proxy_url;
-
+      console.log(proxy_url);
       // Use code parameter and other parameters to make POST request to proxy_server
       fetch(proxy_url, {
         method: "POST",
@@ -82,7 +76,8 @@ export default function Login() {
                 {
                   // Link to request GitHub access
                 }
-                <a className="login-link"
+                <a
+                  className="login-link"
                   href={`https://github.com/login/oauth/authorize?scope=user&client_id=${client_id}&redirect_uri=${redirect_uri}`}
                   onClick={() => {
                     setData({ ...data, errorMessage: "" });
@@ -108,6 +103,7 @@ const Wrapper = Styled.section`
     height: 100vh;
     font-family: Arial;
     
+
     > div:nth-child(1) {
       display: flex;
       flex-direction: column;
@@ -117,19 +113,23 @@ const Wrapper = Styled.section`
       transition: 0.3s;
       width: 25%;
       height: 45%;
+
       > h1 {
         font-size: 2rem;
         margin-bottom: 20px;
       }
+
       > span:nth-child(2) {
         font-size: 1.1rem;
         color: #808080;
         margin-bottom: 70px;
       }
+
       > span:nth-child(3) {
         margin: 10px 0 20px;
         color: red;
       }
+
       .login-container {
         background-color: #000;
         width: 70%;
@@ -138,6 +138,7 @@ const Wrapper = Styled.section`
         display: flex;
         align-items: center;
         justify-content: center;
+
         > .login-link {
           text-decoration: none;
           color: #fff;
@@ -146,16 +147,19 @@ const Wrapper = Styled.section`
           display: flex;
           align-items: center;          
           height: 40px;
+
           > span:nth-child(2) {
             margin-left: 5px;
           }
         }
+
         .loader-container {
           display: flex;
           justify-content: center;
           align-items: center;          
           height: 40px;
         }
+
         .loader {
           border: 4px solid #f3f3f3;
           border-top: 4px solid #3498db;
@@ -164,6 +168,7 @@ const Wrapper = Styled.section`
           height: 12px;
           animation: spin 2s linear infinite;
         }
+
         @keyframes spin {
           0% {
             transform: rotate(0deg);

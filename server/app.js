@@ -3,6 +3,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import { Connection } from "./db";
+require("dotenv").config();
 
 import router from "./api";
 import { httpsOnly, logErrors, pushStateRouting } from "./middleware";
