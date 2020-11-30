@@ -16,7 +16,7 @@ export default function Login() {
   useEffect(() => {
     // After requesting Github access, Github redirects back to your app with a code parameter
     const url = window.location.href;
-    
+    console.log(url);
     const hasCode = url.includes("?code=");
 console.log(hasCode);
     // If Github API returns the code parameter
