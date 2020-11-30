@@ -24,14 +24,18 @@ const App = () => {
   return (
 
    
-   <AuthContext.Provider
+   
+    <BrowserRouter>
+      <AuthContext.Provider
       value={{
         state,
         dispatch
-      }}
-    > 
-   <BlogsContextProvider>
-        <Navbar />
+        }}
+        
+      > 
+        <BlogsContextProvider>
+     
+        {/* <Navbar /> */}
         <Route path="/login" component={Login}/>
         <Route path="/" component={Home}/>
         <Route exact path="/ShowAllPost" component={ShowAllPost}/>
@@ -41,9 +45,11 @@ const App = () => {
         />
         <Route exact path="/AddNewPost" component={AddNewPost}/>
         <Route exact path="/top-ten-blogs" component={TopTenBlog} />
-        <Route exact path="/ShowAllPost/:id" component={DetailBlog}/>
-      </BlogsContextProvider>
+        <Route exact path="/ShowAllPost/:id" component={DetailBlog} />
+         </BlogsContextProvider>
       </AuthContext.Provider> 
+          </BrowserRouter>
+     
    
       
 	);

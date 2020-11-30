@@ -5,6 +5,7 @@ import GithubIcon from "mdi-react/GithubIcon";
 import { AuthContext } from "../App";
 
 
+
 export default function Login() {
   const { state, dispatch } = useContext(AuthContext);
   const [data, setData] = useState({ errorMessage: "", isLoading: false });
@@ -15,13 +16,13 @@ export default function Login() {
   useEffect(() => {
     // After requesting Github access, Github redirects back to your app with a code parameter
     const url = window.location.href;
-    console.log(url);
+    
     const hasCode = url.includes("?code=");
-    console.log(hasCode);
-
+console.log(hasCode);
     // If Github API returns the code parameter
     if (hasCode) {
       const newUrl = url.split("?code=");
+      console.log(newUrl);
       window.history.pushState({}, null, newUrl[0]);
       setData({ ...data, isLoading: true });
 
@@ -32,6 +33,7 @@ export default function Login() {
         code: newUrl[1]
       };
       console.log(requestData);
+
       const proxy_url = state.proxy_url;
       console.log(proxy_url);
       // Use code parameter and other parameters to make POST request to proxy_server

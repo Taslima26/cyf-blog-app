@@ -130,10 +130,10 @@ router.delete("/deleteblog/:id", function (req, res) {
     .catch((e) => console.error(e));
 });
 
-// router.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   next();
-// });
+router.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
 
 router.post("/authenticate", (req, res) => {
   console.log("endpoint hit");
