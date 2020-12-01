@@ -91,9 +91,9 @@ const ShowAllPost = (props) => {
     return (
         <Container>
             <Container className={classes.alignHeader}>
-            <Typography className={classes.buttonColor} variant="h3" gutterBottom>
+            {/* <Typography className={classes.buttonColor} variant="h3" gutterBottom>
         All Blogs!!!
-      </Typography>
+      </Typography> */}
                 <Button className={classes.buttonColor} size="small"variant="contained"  onClick={handleCreate}>
   Create a blog!!
 </Button>

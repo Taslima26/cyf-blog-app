@@ -23,7 +23,10 @@ app.use(morgan("dev"));
 // 	res.json("hello world");
 // })
 
-
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
 if (app.get("env") === "production") {
 	app.enable("trust proxy");
 	app.use(httpsOnly());

@@ -129,16 +129,10 @@ router.delete("/deleteblog/:id", function (req, res) {
     .then(() => res.send(`Blog ${id} deleted!`))
     .catch((e) => console.error(e));
 });
-
-router.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  next();
-});
-
 router.post("/authenticate", (req, res) => {
   console.log("endpoint hit");
   const { client_id, redirect_uri, client_secret, code } = req.body;
-
+  console.log(req.body);
   const data = new FormData();
   data.append("client_id", client_id);
   data.append("client_secret", client_secret);
