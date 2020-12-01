@@ -43,10 +43,6 @@ const ShowAllPost = (props) => {
     const handleUpadte = (id) => {
         history.push(`/ShowAllPost/${id}/EditNewPost`)
     }
-    const handleCreate = () => {
-        history.push(`/AddNewPost`)
-    }
-    
     const handleGoToDetailsPage = (id) => {
         history.push(`/ShowAllPost/${id}`)
     }
@@ -62,21 +58,7 @@ const ShowAllPost = (props) => {
         }
     }
     const useStyles = makeStyles((theme) => ({
-//   root: {
-//     display: 'flex',
-//     flexWrap: 'wrap',
-//     justifyContent: 'space-evenly',
-//    // overflow: 'hidden',
-//     backgroundColor: theme.palette.background.paper,
-//    // flexDirection: 'row',
-//      alignContent: 'space-around',
-    
-//   },
-//   gridList: {
-//     width: 4000,
-//     height: 2000,
-//         },
-  buttonColor: {
+        buttonColor: {
       color:'#ed4343',
         },
         alignHeader: {
@@ -90,14 +72,14 @@ const ShowAllPost = (props) => {
     const classes = useStyles();
     return (
         <Container>
-            <Container className={classes.alignHeader}>
+            {/* <Container className={classes.alignHeader}> */}
             {/* <Typography className={classes.buttonColor} variant="h3" gutterBottom>
         All Blogs!!!
       </Typography> */}
                 {/* <Button className={classes.buttonColor} size="small"variant="contained"  onClick={handleCreate}>
   Create a blog!!
 </Button> */}
-                </Container>
+                {/* </Container> */}
          <div className={classes.root}>
             
              {blogs.map((tile) => (

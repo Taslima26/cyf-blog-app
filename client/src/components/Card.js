@@ -57,7 +57,7 @@ export default function OutlinedCard({ title, subTitle, mainContent, createdOnDa
         
       </CardContent>
       <CardActions>
-        <Button size="small" variant="outlined" className={classes.buttonColor} onClick={() => handleGoToDetailsPage(id)} >Learn More </Button>
+        <Button size="small" variant="outlined" className={classes.buttonColor} onClick={() => handleGoToDetailsPage(id)} >Read More </Button>
               <Button size="small" variant="outlined" className={classes.buttonColor} startIcon={<EditIcon/>}onClick={()=>handleUpdate(id)}>Edit</Button>
               <Button size="small" variant="outlined" className={classes.buttonColor} startIcon={<DeleteIcon />} onClick={() => deletePost(id)}>Delete</Button>
               <IconButton aria-label="add to favorites" className={classes.buttonColor}>

@@ -17,6 +17,8 @@ import { styles } from "./components/css-common";
 import { AppBar, Toolbar, Typography, withStyles } from '@material-ui/core';
 import { propTypes } from "react-bootstrap/esm/Image";
 import logo from './public/cyf_brand.png';
+import { Container } from '@material-ui/core';
+import CreateBlogButton from "./components/CreateBlogButton";
 //import blog from "../src/public/download";
 
 export const AuthContext = createContext();
@@ -27,27 +29,39 @@ const App = (props) => {
         height: "50px",
         '& .MuiToolbar-regular': {
             minHeight: "50px"
-        }
+      },
+        justifyContent: "flex-end",
+      flexDirection:"row",
+     
     },
     name: {
-        marginRight: "15px"
+      marginRight: "630px",
+      
+      
     },
     link: {
         textTransform: "unset",
         color: "#a5a5a5",
         margin: "0 20px",
-        textDecoration: "unset"
-    }
+      textDecoration: "unset",
+       display: "flex",
+      
+        
+    },
+    linkname: {
+      display: "flex",
+      
+    },
 
   })
   const classes = useStyles();
   return ( <BlogsContextProvider>
     <>
       
-    <div>
+    <Container>
         <div>
            <div style={{
-        backgroundImage: `url('/client/src/public/BLOG-4.jpg')` ,height:'380px' ,width :'100%'}}
+        backgroundImage: `url('/client/src/public/whiteImage.jpg')` ,height:'380px' ,width :'100%'}}
     >
             <img src={logo} style={{ width: 250, marginTop: -7 }} />
             </div>
@@ -57,33 +71,24 @@ const App = (props) => {
                 CYF-BLOG-APP
             </Typography>
               <Link to={"/home"} className={classes.link}>
-              <Typography variant="body2">
+              <Typography variant="body2" className={classes.linkname} >
                 Home
               </Typography>
             </Link>
             <Link to={"/about"} className={classes.link}>
-              <Typography variant="body2">
+              <Typography variant="body2" className={classes.linkname}>
                 About Us
               </Typography>
             </Link>
             <Link to={"/login"} className={classes.link}>
-              <Typography variant="body2">
-                Login
+              <Typography variant="body2" className={classes.linkname}>
+                  Login
             </Typography>
-              </Link>
-              <Link to={"/top-ten-blogs"} className={classes.link}>
-              <Typography variant="body2">
-               Top Ten Blogs
-            </Typography>
-              </Link>
-              <Link to={"/addnewpost"} className={classes.link}>
-              <Typography variant="body2">
-              Add New Post
-            </Typography>
-            </Link>
-          </Toolbar>
-        </AppBar>
-
+                </Link>
+           </Toolbar>
+          </AppBar>
+          
+           < CreateBlogButton/>
           <Switch>
             <Route exact path="/" component={ShowAllPost} />
             <Route exact path="/home" component={ShowAllPost}/>
@@ -102,7 +107,7 @@ const App = (props) => {
          
       </div>
          
-    </div>
+    </Container>
    </>
       </BlogsContextProvider>
 	);
