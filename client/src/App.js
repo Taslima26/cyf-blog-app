@@ -75,14 +75,21 @@ const App = (props) => {
               <Typography variant="body2">
                Top Ten Blogs
             </Typography>
+              </Link>
+              <Link to={"/addnewpost"} className={classes.link}>
+              <Typography variant="body2">
+              Add New Post
+            </Typography>
             </Link>
           </Toolbar>
         </AppBar>
 
           <Switch>
-          <Route exact path="/" component={ShowAllPost}/>
+            <Route exact path="/" component={ShowAllPost} />
+            <Route exact path="/home" component={ShowAllPost}/>
          <Route exact path="/about" component={AboutUs} />
-         <Route exact path="/top-ten-blogs" component={TopTenBlog} />
+            <Route exact path="/top-ten-blogs" component={TopTenBlog} />
+            <Route exact path="/addnewpost" component={AddNewPost}/>
         
             </Switch>
           
@@ -90,7 +97,7 @@ const App = (props) => {
       <Route exact path="/ShowAllPost/:id/EditNewPost"
               component={EditNewPost}
         />
-        <Route exact path="/AddNewPost" component={AddNewPost}/>
+        
         <Route exact path="/ShowAllPost/:id" component={DetailBlog} />
          
       </div>
