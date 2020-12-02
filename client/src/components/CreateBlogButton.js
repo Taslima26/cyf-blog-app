@@ -14,11 +14,11 @@ function CreateBlogButton() {
             color: '#ed4343',
             marginTop: "2rem",
             marginBottom:"2rem",
-            marginLeft: "10rem",
-            display: "flex",
-            justifyContent: "center",
-            alignSelf: "center",
-            alignItems:"center",
+           marginLeft: "2rem",
+            //  display: "flex",
+            // justifyContent: "right",
+            // alignSelf: "right",
+            // alignItems:"right",
 
         },
 

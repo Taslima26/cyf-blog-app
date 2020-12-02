@@ -87,8 +87,9 @@ const App = (props) => {
                 </Link>
            </Toolbar>
           </AppBar>
-          
-           < CreateBlogButton/>
+          <div>
+            < CreateBlogButton />
+            </div>
           <Switch>
             <Route exact path="/" component={TopTenBlog} />
             <Route exact path="/home" component={TopTenBlog}/>

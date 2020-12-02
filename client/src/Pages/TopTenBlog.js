@@ -61,7 +61,14 @@ const TopTenBlog = (props) => {
     }
     const useStyles = makeStyles((theme) => ({
         buttonColor: {
-      color:'#ed4343',
+            color: '#ed4343',
+            marginTop: "2rem",
+            marginBottom:"2rem",
+            // marginLeft: "10rem",
+            // display: "flex",
+            // justifyContent: "center",
+            // alignSelf: "center",
+            // alignItems:"center",
         },
         alignHeader: {
             display: "flex",

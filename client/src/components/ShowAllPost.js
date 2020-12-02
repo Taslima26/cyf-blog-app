@@ -79,7 +79,8 @@ const ShowAllPost = (props) => {
                 {/* <Button className={classes.buttonColor} size="small"variant="contained"  onClick={handleCreate}>
   Create a blog!!
 </Button> */}
-                {/* </Container> */}
+            {/* </Container> */}
+            
          <div className={classes.root}>
             
              {blogs.map((tile) => (
