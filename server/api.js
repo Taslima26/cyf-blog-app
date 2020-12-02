@@ -34,7 +34,23 @@ router.get("/getlatest", function (req, res) {
 
 router.get("/getall", async (req, res) => {
   try {
-   const result= await Connection.query("SELECT * FROM blog_article ORDER BY create_on_date")
+   const result= await Connection.query("SELECT * FROM blog_article ORDER BY create_on_date ")
+    res.status(200).json({
+      status: "success",
+      data: {
+        blogs: result.rows,
+       
+      },
+    })
+  }
+  catch (err) {
+    console.log(err);
+  }
+})
+
+router.get("/gettopten", async (req, res) => {
+  try {
+   const result= await Connection.query("SELECT * FROM blog_article ORDER BY create_on_date limit 10")
     res.status(200).json({
       status: "success",
       data: {

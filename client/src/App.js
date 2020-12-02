@@ -90,8 +90,8 @@ const App = (props) => {
           
            < CreateBlogButton/>
           <Switch>
-            <Route exact path="/" component={ShowAllPost} />
-            <Route exact path="/home" component={ShowAllPost}/>
+            <Route exact path="/" component={TopTenBlog} />
+            <Route exact path="/home" component={TopTenBlog}/>
          <Route exact path="/about" component={AboutUs} />
             <Route exact path="/top-ten-blogs" component={TopTenBlog} />
             <Route exact path="/addnewpost" component={AddNewPost}/>
@@ -102,7 +102,7 @@ const App = (props) => {
       <Route exact path="/ShowAllPost/:id/EditNewPost"
               component={EditNewPost}
         />
-        
+      <Route exact path='/ShowAllPost'  component={ShowAllPost}/> 
         <Route exact path="/ShowAllPost/:id" component={DetailBlog} />
          
       </div>
