@@ -22,8 +22,7 @@ function CreateBlogButton() {
 
         },
 
-})
-)
+}))
  const classes = useStyles();
      
   return (

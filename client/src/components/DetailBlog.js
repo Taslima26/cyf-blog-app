@@ -8,6 +8,10 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import StarRating from './StarRating';
+import Box from '@material-ui/core/Box';
+import Rating from '@material-ui/lab/Rating';
+
 
 
 const DetailBlog = () => {
@@ -67,11 +71,21 @@ const DetailBlog = () => {
         <Typography variant="body2" component="p">
          
          {blog.main_content}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small" onClick={goBack} className={classes.buttonColor}>Go back to all blogs!</Button>
-      </CardActions>
+          </Typography>
+          
+        </CardContent>
+        <Box display="flex">
+           <StarRating/>
+          <Box marginLeft={10} bgcolor="background.paper">
+            
+           <Typography>Feel free to give rating!</Typography>
+      </Box>
+        </Box>
+         <CardActions>
+          <Button size="small" onClick={goBack} className={classes.buttonColor}>Go back to all blogs!</Button>
+          
+          </CardActions>
+        
     </Card>
     )}
 

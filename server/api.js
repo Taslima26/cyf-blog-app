@@ -34,14 +34,17 @@ router.get("/getlatest", function (req, res) {
 
 router.get("/getall", async (req, res) => {
   try {
+    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
    const result= await Connection.query("SELECT * FROM blog_article ORDER BY create_on_date ")
     res.status(200).json({
       status: "success",
       data: {
-        blogs: result.rows,
+       blogs: result.rows,
        
       },
     })
+    console.log(result);
+    
   }
   catch (err) {
     console.log(err);
@@ -50,14 +53,16 @@ router.get("/getall", async (req, res) => {
 
 router.get("/gettopten", async (req, res) => {
   try {
+    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
    const result= await Connection.query("SELECT * FROM blog_article ORDER BY create_on_date limit 10")
     res.status(200).json({
       status: "success",
       data: {
         blogs: result.rows,
-       
       },
+      
     })
+    console.log(result);
   }
   catch (err) {
     console.log(err);
@@ -74,9 +79,10 @@ router.get("/gettop", function (req, res) {
 
 router.post("/addblog", async (req, res) => {
   try {
-    let todaysDate = moment();
+    var d = new Date();
+    let todaysDate = d.toLocaleString();
     console.log(todaysDate);
-    const results =  await Connection.query("Insert into blog_article(title,sub_title,main_content,create_on_date) values ($1,$2,$3,$4) returning *", [req.body.title, req.body.sub_title, req.body.main_content,todaysDate.format('YYYY-MM-DD')])
+    const results =  await Connection.query("Insert into blog_article(title,sub_title,main_content,create_on_date) values ($1,$2,$3,$4) returning *", [req.body.title, req.body.sub_title, req.body.main_content,todaysDate])
     console.log(results);
     res.status(201).json({
       status: "sucess",

@@ -38,7 +38,8 @@ const ShowAllPost = (props) => {
             
         }
         fetchData();
-    },[])
+    }, [])
+    
 
     const handleUpadte = (id) => {
         history.push(`/ShowAllPost/${id}/EditNewPost`)
@@ -72,16 +73,8 @@ const ShowAllPost = (props) => {
     const classes = useStyles();
     return (
         <Container>
-            {/* <Container className={classes.alignHeader}> */}
-            {/* <Typography className={classes.buttonColor} variant="h3" gutterBottom>
-        All Blogs!!!
-      </Typography> */}
-                {/* <Button className={classes.buttonColor} size="small"variant="contained"  onClick={handleCreate}>
-  Create a blog!!
-</Button> */}
-            {/* </Container> */}
-            
-         <div className={classes.root}>
+           
+            <div className={classes.root}>
             
              {blogs.map((tile) => (
         

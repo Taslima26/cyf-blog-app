@@ -2,7 +2,6 @@ import React, { Fragment, useEffect, useState } from "react";
 import "./App.css";
 import AddNewPost from "./components/AddNewPost";
 import ShowAllPost from "./components/ShowAllPost";
-import Navbar from "./components/NavBar";
 import AboutUs from "./Pages/About";
 import TopTenBlog from "./Pages/TopTenBlog";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -13,7 +12,6 @@ import DetailBlog from "./components/DetailBlog";
 import { initialState, reducer } from "./store/reducer/"
 import { createContext, useReducer } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
-import { styles } from "./components/css-common";
 import { AppBar, Toolbar, Typography, withStyles } from '@material-ui/core';
 import { propTypes } from "react-bootstrap/esm/Image";
 import logo from './public/cyf_brand.png';

@@ -38,6 +38,7 @@ const TopTenBlog = (props) => {
         }
         fetchData();
     }, [])
+    
     const handleShowAllPost = () => {
         history.push(`ShowAllPost`)
     }
