@@ -24,17 +24,10 @@ router.get("/getlatest", function (req, res) {
     .then((result) => res.json(result.rows))
     .catch((e) => console.error(e));
 });
-//show all articles
-// router.get("/getall", function (req, res) {
-//   Connection
-//     .query("SELECT * FROM blog_article ORDER BY create_on_date")
-//     .then((result) => res.json(result.rows))
-//     .catch((e) => console.error(e));
-// });
 
 router.get("/getall", async (req, res) => {
   try {
-    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+   
    const result= await Connection.query("SELECT * FROM blog_article ORDER BY create_on_date ")
     res.status(200).json({
       status: "success",
@@ -53,7 +46,7 @@ router.get("/getall", async (req, res) => {
 
 router.get("/gettopten", async (req, res) => {
   try {
-    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    
    const result= await Connection.query("SELECT * FROM blog_article ORDER BY create_on_date limit 10")
     res.status(200).json({
       status: "success",
@@ -106,10 +99,15 @@ router.get("/getblog/:id", async (req, res) => {
       "select * from blog_article  where id = $1",
       [req.params.id]
     );
+    const reviews = await Connection.query(
+      "select * from blog_review where article_id=$1", [
+        req.params.id,
+      ])
     res.status(200).json({
       status: "success",
       data: {
-        blog:result.rows[0],
+        blog: result.rows[0],
+        reviews:reviews.rows
        
       },
     });

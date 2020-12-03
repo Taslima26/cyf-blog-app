@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import StarRating from './StarRating';
 import Box from '@material-ui/core/Box';
 import Rating from '@material-ui/lab/Rating';
-
+import FormDialog from './FormDialog';
 
 
 const DetailBlog = () => {
@@ -22,6 +22,8 @@ const DetailBlog = () => {
     useEffect(() => {
     const fetchData = async () => {
       const response = await client.get(`/getblog/${id}`,)
+     
+     // response.data.data.blog.map (p => p.create_on_date!=null ?p.create_on_date=new  Date(p.create_on_date).toLocaleDateString("en-GB",options) :p.create_on_date= 'no date')
         setBlog(response.data.data.blog)
         console.log(response);
         
@@ -29,8 +31,14 @@ const DetailBlog = () => {
     fetchData();
     
   }, [])
-    
-    const useStyles = makeStyles({
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const useStyles = makeStyles({
   root: {
     minWidth: 275,
   },
@@ -56,7 +64,8 @@ const DetailBlog = () => {
         history.push("/")
     }
     
-    return (
+  return (
+      <>
         <Card className={classes.root}>
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
@@ -65,8 +74,9 @@ const DetailBlog = () => {
         <Typography variant="h5" component="h2">
          {blog.sub_title}
         </Typography>
-        <Typography className={classes.pos} color="textSecondary">
-          Created on {blog.create_on_date} by Taslima
+          <Typography className={classes.pos} color="textSecondary">
+           
+          Created on {blog.create_on_date!=null ?blog.create_on_date=new  Date(blog.create_on_date).toLocaleDateString("en-GB",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) :blog.create_on_date= 'no date'} by Taslima
         </Typography>
         <Typography variant="body2" component="p">
          
@@ -75,10 +85,10 @@ const DetailBlog = () => {
           
         </CardContent>
         <Box display="flex">
-           <StarRating/>
+          
           <Box marginLeft={10} bgcolor="background.paper">
             
-           <Typography>Feel free to give rating!</Typography>
+          <Button className={classes.buttonColor} onClick={handleClickOpen}>Write a review about blog</Button>
       </Box>
         </Box>
          <CardActions>
@@ -86,7 +96,10 @@ const DetailBlog = () => {
           
           </CardActions>
         
-    </Card>
+      </Card>
+      <FormDialog handleClickOpen={handleClickOpen} open={open} setOpen={setOpen} />
+     
+      </>
     )}
 
 export default DetailBlog;

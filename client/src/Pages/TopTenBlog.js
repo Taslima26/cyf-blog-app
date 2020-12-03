@@ -27,8 +27,10 @@ const TopTenBlog = (props) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
                 const response = await client.get("/gettopten");
-                console.log(response);
+                
+                response.data.data.blogs.forEach(p => p.create_on_date!=null ?p.create_on_date=new  Date(p.create_on_date).toLocaleDateString("en-GB",options) :p.create_on_date= 'no date')
                 setBlogs(response.data.data.blogs);
             }
             catch (error) {
