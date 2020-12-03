@@ -149,42 +149,24 @@ router.delete("/deleteblog/:id", function (req, res) {
     .then(() => res.send(`Blog ${id} deleted!`))
     .catch((e) => console.error(e));
 });
-router.post("/authenticate", (req, res) => {
-  console.log("endpoint hit");
-  const { client_id, redirect_uri, client_secret, code } = req.body;
-  console.log(req.body);
-  const data = new FormData();
-  data.append("client_id", client_id);
-  data.append("client_secret", client_secret);
-  data.append("code", code);
-  data.append("redirect_uri", redirect_uri);
 
-  // Request to exchange code for an access token
-  fetch(`https://github.com/login/oauth/access_token`, {
-    method: "POST",
-    body: data
-  })
-    .then(response => response.text())
-    .then(paramsString => {
-      let params = new URLSearchParams(paramsString);
-      const access_token = params.get("access_token");
-      const scope = params.get("scope");
-      const token_type = params.get("token_type");
-
-      // Request to return data of a user that has been authenticated
-      return fetch(
-        `https://api.github.com/user?access_token=${access_token}&scope=${scope}&token_type=${token_type}`
-      );
-    })
-    .then(response => response.json())
-    .then(response => {
-      return res.status(200).json(response);
-    })
-    .catch(error => {
-      return res.status(400).json(error);
+router.post("/getblog/:id/addReview", async (req, res) => {
+  try {
+    const newReview = await Connection.query(
+      "INSERT INTO blog_review (user_id, github_id, no_of_likes, reviewer_name,reviewer_comment) values ($1, $2, $3, $4,$5) returning *;",
+      [req.params.userId, req.body.githubId, req.body.noOfLikes, req.body.reviewerName,req.body.reviewerComment]
+    );
+    console.log(newReview);
+    res.status(201).json({
+      status: "success",
+      data: {
+        review: newReview.rows[0],
+      },
     });
+  } catch (err) {
+    console.log(err);
+  }
 });
-
 
 
 router.get("/", (_, res, next) => {
