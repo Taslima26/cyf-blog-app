@@ -18,6 +18,7 @@ import logo from './public/cyf_brand.png';
 import { Container } from '@material-ui/core';
 import CreateBlogButton from "./components/CreateBlogButton";
 //import blog from "../src/public/download";
+import Login from './components/Login';
 
 export const AuthContext = createContext();
 const App = (props) => {
@@ -87,6 +88,7 @@ const App = (props) => {
           </AppBar>
           <div>
             < CreateBlogButton />
+            <Login />
             </div>
           <Switch>
             <Route exact path="/" component={TopTenBlog} />

@@ -17,7 +17,7 @@ const AddNewPost = () => {
   const { blogs, setBlogs,addBlogs } = useContext(BlogsContext);
   
   const savePost = async(event)=>{
-        event.preventDefault();
+       // event.preventDefault();
         try {
            const response= await client.post("/addblog", {
                 title: title,

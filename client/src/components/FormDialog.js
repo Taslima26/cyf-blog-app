@@ -6,72 +6,105 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import StarRating from './StarRating';
 import client from '../api';
- import React from 'react'
+import React from 'react'
+import { FormControlLabel } from '@material-ui/core';
+import Rating from '@material-ui/lab/Rating';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import RaisedButton from '@material-ui/core';
+import { useParams,useHistory } from 'react-router-dom';
+
+
+function FormDialog({ open, setOpen }) {
+  const { id } = useParams();
+  
+   const history = useHistory();
+  const [name, setName] =  React.useState(undefined);
+  const [comment, setComment] =  React.useState(undefined);
+  const [rating, setRating] = useState(2);
  
-function FormDialog({ open, setOpen,rating}) {
-  const [name, setName] = useState("");
-  const [comment, setComment] = useState("");
  
-  console.log("rating from Form Dialog", rating);
-  console.log("name", name);
-  console.log("comment", comment);
 const handleClose = () => {
     setOpen(false);
   };
 
-  const handleSubmitReview = () => {
-    console.log("hello from handle submit review")
+  const handleNameChange = e => {
+        setName(e.target.value);
+  };
+  const handleCommentChange = e => {
+        setComment(e.target.value);
+    };
+console.log("rating from Form Dialog",rating);
+       console.log("name", name);
+        console.log("comment", comment);
+  
+  const  handleSubmitReview = async(event) => {
+    //event.preventDefault();
+    console.log("I am click");
+    
+    try {
+     
+      console.log("I am clicked");
+      console.log("rating from Form Dialog",rating);
+       console.log("name", name);
+        console.log("comment", comment);
+  
+      const response = await client.post(`/getblog/${id}/addReview`, {
+                reviewer_name: name,
+                reviewer_comment: comment,
+                 no_of_likes: rating,
+                  article_id:id
+                
+      })
+            console.log(response);
+            
+      
+    } catch (error) {
+      console.log(error);
+    }
+
   }
 
-  
   return (
-    <div>
-      {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open form dialog
-      </Button> */}
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Review</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Writer would love your feedback! We would send you similar blogs in e-mail.
-          </DialogContentText>
-          <TextField
+    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+      <form onSubmit={handleSubmitReview}>
+
+    <DialogTitle id="form-dialog-title">Some Title</DialogTitle>
+    <DialogContent>
+        <DialogContentText>
+          Some Explanation
+        </DialogContentText>
+        <TextField
             autoFocus
             margin="dense"
-            onChange={(e)=>setName(e.target.value)}
-            value={name}
             id="name"
-            label="Name"
-            type="email"
+            label="Some Required Input"
+            type="text"
             fullWidth
-          />
-           <TextField
+            value={name}
+            onChange={handleNameChange}
+        />
+        <TextField
             autoFocus
-            value={comment}
-            onChange={(e)=>setComment(e.target.value)}
             margin="dense"
             id="comment"
-            label="Review"
-            type="email"
+            label="Some Required Input"
+            type="text"
             fullWidth
-          />
-          <StarRating/>
-          
-
+            value={comment}
+            onChange={handleCommentChange}
+        />
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
+    <DialogActions>
+        <Button onClick={handleClose} color="secondary">
             Cancel
-          </Button>
-          <Button onClick={handleSubmitReview} color="primary">
-            Subscribe
-          </Button>
-           
+        </Button>
+        <Button onClick={handleSubmitReview} color="primary">
+            Create
+        </Button>
         </DialogActions>
-      </Dialog>
-    </div>
+        </form>
+</Dialog>
   );
 }
 export default FormDialog;
