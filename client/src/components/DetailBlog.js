@@ -10,6 +10,11 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import FormDialog from './FormDialog';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import DisplayReview from './DisplayReview';
 
 
 const DetailBlog = () => {
@@ -36,7 +41,7 @@ const DetailBlog = () => {
     setOpen(true);
   };
 
-  const useStyles = makeStyles({
+  const useStyles = makeStyles((theme)=>({
   root: {
     minWidth: 275,
   },
@@ -53,8 +58,9 @@ const DetailBlog = () => {
         },
   buttonColor: {
       color:'#ed4343',
-  },
-    });
+    },
+  
+    }));
     const classes = useStyles();
     const bull = <span className={classes.bullet}>•</span>;
 
@@ -89,14 +95,16 @@ const DetailBlog = () => {
           <Button className={classes.buttonColor} onClick={handleClickOpen}>Write a review about blog</Button>
       </Box>
         </Box>
+       
          <CardActions>
           <Button size="small" onClick={goBack} className={classes.buttonColor}>Go back to all blogs!</Button>
           
           </CardActions>
         
       </Card>
+       <DisplayReview />
       <FormDialog handleClickOpen={handleClickOpen} open={open} setOpen={setOpen} />
-     
+      
       </>
     )}
 

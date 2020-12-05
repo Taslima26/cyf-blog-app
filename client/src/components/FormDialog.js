@@ -13,14 +13,17 @@ import Rating from '@material-ui/lab/Rating';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import RaisedButton from '@material-ui/core';
 import { useParams,useHistory } from 'react-router-dom';
-import { useStyles,makeStyles } from '@material-ui/core/styles';
+import { useStyles, makeStyles } from '@material-ui/core/styles';
+
+
 
 export default function FormDialog({ open, setOpen }) {
-  const useStyles = makeStyles({
+  const useStyles = makeStyles((theme)=>({
     buttonColor: {
       color:'#ed4343',
-  },
-    });
+    },
+    
+    }));
   const { id } = useParams();
   
   const history = useHistory();
@@ -112,6 +115,8 @@ export default function FormDialog({ open, setOpen }) {
         </DialogActions>
       </form>
     </Dialog>
+     
+
   );
 
 }
