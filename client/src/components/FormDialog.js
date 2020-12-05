@@ -1,4 +1,4 @@
-import {useEffect, useState } from 'react';
+import {useEffect, useState,useRef } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -13,98 +13,105 @@ import Rating from '@material-ui/lab/Rating';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import RaisedButton from '@material-ui/core';
 import { useParams,useHistory } from 'react-router-dom';
+import { useStyles,makeStyles } from '@material-ui/core/styles';
 
-
-function FormDialog({ open, setOpen }) {
+export default function FormDialog({ open, setOpen }) {
+  const useStyles = makeStyles({
+    buttonColor: {
+      color:'#ed4343',
+  },
+    });
   const { id } = useParams();
   
-   const history = useHistory();
-  const [name, setName] =  React.useState(undefined);
-  const [comment, setComment] =  React.useState(undefined);
+  const history = useHistory();
+  const [name, setName] = React.useState("");
+  const [comment, setComment] = React.useState("");
   const [rating, setRating] = useState(2);
+  const getName = useRef();
+  const getComment = useRef()
  
  
-const handleClose = () => {
+  const handleClose = () => {
     setOpen(false);
   };
 
   const handleNameChange = e => {
-        setName(e.target.value);
+    setName(e.target.value);
   };
   const handleCommentChange = e => {
-        setComment(e.target.value);
-    };
-console.log("rating from Form Dialog",rating);
-       console.log("name", name);
-        console.log("comment", comment);
+    setComment(e.target.value);
+  };
+  console.log(setName);
+  console.log(setComment);
   
-  const  handleSubmitReview = async(event) => {
-    //event.preventDefault();
-    console.log("I am click");
-    
+  const handleSubmitReview = async (event) => {
     try {
-     
-      console.log("I am clicked");
-      console.log("rating from Form Dialog",rating);
-       console.log("name", name);
-        console.log("comment", comment);
-  
+      event.preventDefault();
+      console.log("I am click");
+      console.log("rating from Form Dialog", rating);
+      console.log("name", name);
+      console.log("comment", comment);
       const response = await client.post(`/getblog/${id}/addReview`, {
-                reviewer_name: name,
-                reviewer_comment: comment,
-                 no_of_likes: rating,
-                  article_id:id
+        reviewerName: name,
+        reviewerComment: comment,
+        noOfLikes: rating,
+        article_id: id
                 
       })
-            console.log(response);
-            
       
+      console.log(response);
     } catch (error) {
       console.log(error);
+    
     }
-
   }
-
+   const classes = useStyles();
   return (
-    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-      <form onSubmit={handleSubmitReview}>
+    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" color="primary"
+      actions={[<RaisedButton type="submit" form="my-form-id" label="Submit" />
+      ]}>
+      <form id="my-form-id" onSubmit={handleSubmitReview}>
 
-    <DialogTitle id="form-dialog-title">Some Title</DialogTitle>
-    <DialogContent>
-        <DialogContentText>
-          Some Explanation
+        <DialogTitle id="form-dialog-title">Feedback Form!</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+           Authors loves to hear from readers! Please provide your feedback.
         </DialogContentText>
-        <TextField
+          <TextField
             autoFocus
             margin="dense"
             id="name"
-            label="Some Required Input"
+            label="Name"
             type="text"
             fullWidth
             value={name}
             onChange={handleNameChange}
-        />
-        <TextField
+            ref={getName}
+            className={classes.buttonColor}
+          />
+          <TextField
             autoFocus
             margin="dense"
             id="comment"
-            label="Some Required Input"
+            label="Comment"
             type="text"
             fullWidth
             value={comment}
             onChange={handleCommentChange}
-        />
+            ref={getComment}
+             className={classes.buttonColor}
+          />
         </DialogContent>
-    <DialogActions>
-        <Button onClick={handleClose} color="secondary">
+        <DialogActions>
+          <Button className={classes.buttonColor} type="submit" onClick={handleClose} >
             Cancel
         </Button>
-        <Button onClick={handleSubmitReview} color="primary">
+          <Button className={classes.buttonColor} type ="submit" onClick={handleSubmitReview}>
             Create
         </Button>
         </DialogActions>
-        </form>
-</Dialog>
+      </form>
+    </Dialog>
   );
+
 }
-export default FormDialog;

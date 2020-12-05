@@ -5,6 +5,7 @@ import axios from 'axios';
 
 const Login = () => {
     const onSuccess = async (response) => {
+        console.log(response);
         const accessCode = response.code;
          const fetchUserName = (code)=>{
             return axios.get(`https://cyf-blog-app.herokuapp.com/api/callback?code=${code}`)
@@ -14,16 +15,16 @@ const Login = () => {
         }
         const githubname = await fetchUserName(accessCode);
         
-        console.log(githubname);
-        // const setGithub = (githubname)=>{
-        // const avatar_url =`https://avatars.githubusercontent.com/${githubname}`
-        //     const github = {
-        //         avatar:avatar_url,
-        //         accountname:githubname
-        //     }
-        //     dispatch({ type: types.Set_Github, payload:github }); 
-        // }
-       // setGithub(githubname);
+        
+        const setGithub = (githubname)=>{
+        const avatar_url =`https://avatars.githubusercontent.com/${githubname}`
+            const github = {
+                avatar:avatar_url,
+                accountname:githubname
+            }
+            dispatch({ type: types.Set_Github, payload:github }); 
+        }
+        setGithub(githubname);
         //await checkGraduate(githubname);
         //clearProfile();
     }

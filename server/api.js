@@ -155,8 +155,8 @@ router.delete("/deleteblog/:id", function (req, res) {
 router.post("/getblog/:article_id/addReview", async (req, res) => {
   try {
     const newReview = await Connection.query(
-      "INSERT INTO blog_review (user_id, github_id, no_of_likes, reviewer_name,reviewer_comment) values ($1, $2, $3, $4,$5) returning *;",
-      [req.params.userId, req.body.githubId, req.body.noOfLikes, req.body.reviewerName,req.body.reviewerComment]
+      "INSERT INTO blog_review (article_id, github_id, no_of_likes, reviewer_name,reviewer_comment) values ($1, $2, $3, $4,$5) returning *;",
+      [req.params.article_id, req.body.githubId, req.body.noOfLikes, req.body.reviewerName,req.body.reviewerComment]
     );
     console.log(newReview);
     res.status(201).json({
@@ -197,7 +197,9 @@ router.get("/login", (req, res) => {
 
 // Callback service parsing the authorization token and asking for the access token
 router.get("/callback", async (req, res) => {
+  console.log(req.query);
   const { code } = req.query;
+  
   const options = {
     code,
   };
