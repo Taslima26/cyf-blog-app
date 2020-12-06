@@ -60,7 +60,7 @@ export default function FormDialog({ open, setOpen }) {
                 
         })
       console.log(response);
-      addReviews(response.data.data.review);
+      history.push("/");
       history.push(`/ShowAllPost/${id}`)
       
       
@@ -136,7 +136,7 @@ export default function FormDialog({ open, setOpen }) {
         </DialogContent>
         <DialogActions>
           <Button className={classes.buttonColor} type="submit" onClick={handleClose} >
-            Close
+            Cancel
         </Button>
           <Button className={classes.buttonColor} type ="submit" onClick={handleSubmitReview}>
             Save
