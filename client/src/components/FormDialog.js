@@ -14,6 +14,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import RaisedButton from '@material-ui/core';
 import { useParams,useHistory } from 'react-router-dom';
 import { useStyles, makeStyles } from '@material-ui/core/styles';
+import StarIcon from '@material-ui/icons/Star';
 
 
 
@@ -22,16 +23,16 @@ export default function FormDialog({ open, setOpen }) {
     buttonColor: {
       color:'#ed4343',
     },
-    
     }));
   const { id } = useParams();
   
   const history = useHistory();
   const [name, setName] = React.useState("");
   const [comment, setComment] = React.useState("");
-  const [rating, setRating] = useState(2);
+  const [rating, setRating] = useState(0);
   const getName = useRef();
   const getComment = useRef()
+  const getRating=useRef()
  
  
   const handleClose = () => {
@@ -92,6 +93,7 @@ export default function FormDialog({ open, setOpen }) {
             ref={getName}
             className={classes.buttonColor}
           />
+          <br />
           <TextField
             autoFocus
             margin="dense"
@@ -104,6 +106,33 @@ export default function FormDialog({ open, setOpen }) {
             ref={getComment}
              className={classes.buttonColor}
           />
+          <br />
+          <FormControlLabel
+            control={
+              <>
+                <input
+                  name="rating"
+                  type="number"
+                  value={rating}
+                  ref={getRating}
+                  hidden
+                  readOnly
+                />
+                <Rating
+                  name="rating"
+                  value={rating}
+                 precision={0.5}
+                  onChange={(_, value) => {
+                    setRating(value);
+                  }}
+                  icon={<StarIcon fontSize="inherit" />}
+                  className={classes.buttonColor}
+                />
+              </>
+            }
+            label="select rating"
+          />
+          
         </DialogContent>
         <DialogActions>
           <Button className={classes.buttonColor} type="submit" onClick={handleClose} >
