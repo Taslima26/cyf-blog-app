@@ -21,20 +21,21 @@ const DetailBlog = () => {
     const { id } = useParams();
     const history = useHistory();
     console.log("id from showDetails page", id);
-    const { blog, setBlog } = useContext(BlogsContext);
+    const { blog, setBlog,reviews,setReviews } = useContext(BlogsContext);
     useEffect(() => {
     const fetchData = async () => {
       const response = await client.get(`/getblog/${id}`,)
      
      // response.data.data.blog.map (p => p.create_on_date!=null ?p.create_on_date=new  Date(p.create_on_date).toLocaleDateString("en-GB",options) :p.create_on_date= 'no date')
-        setBlog(response.data.data.blog)
+      setBlog(response.data.data.blog)
+      setReviews(response.data.data.reviews)
         console.log(response);
         
     }
     fetchData();
     
   }, [])
-
+  
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -102,7 +103,7 @@ const DetailBlog = () => {
           </CardActions>
         
       </Card>
-       <DisplayReview />
+      <DisplayReview reviews={reviews}/>
       <FormDialog handleClickOpen={handleClickOpen} open={open} setOpen={setOpen} />
       
       </>
