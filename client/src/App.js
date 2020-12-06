@@ -1,4 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
+import Box from '@material-ui/core/Box';
+
 import "./App.css";
 import AddNewPost from "./components/AddNewPost";
 import ShowAllPost from "./components/ShowAllPost";
@@ -19,6 +21,7 @@ import { Container } from '@material-ui/core';
 import CreateBlogButton from "./components/CreateBlogButton";
 //import blog from "../src/public/download";
 import Login from './components/Login';
+import { flexbox } from '@material-ui/system';
 
 export const AuthContext = createContext();
 const App = (props) => {
@@ -29,26 +32,28 @@ const App = (props) => {
         '& .MuiToolbar-regular': {
             minHeight: "50px"
       },
-        justifyContent: "flex-end",
-      flexDirection:"row",
+      // justifyContent: "flex-end",
+      // flexDirection:"row",
      
     },
     name: {
-      marginRight: "630px",
+      marginRight: "700px",
       
       
     },
     link: {
-        textTransform: "unset",
+        textTransform: '#ed4343',
         color: "#a5a5a5",
         margin: "0 20px",
       textDecoration: "unset",
-       display: "flex",
+       
       
         
     },
+    
+    
     linkname: {
-      display: "flex",
+      
       
     },
 
@@ -64,16 +69,23 @@ const App = (props) => {
     >
             <img src={logo} style={{ width: 250, marginTop: -7 }} />
             </div>
-        <AppBar className={classes.appBar} position="static">
-          <Toolbar>
+          <AppBar className={classes.appBar} position="static">
+           <Box display="flex" flexDirection="row" justifyContent="flex-end">
+              <Toolbar>
+                  <Box display="flex" flexDirection="row"  >
             <Typography className={classes.name} variant="h6">
-                CYF-BLOG-APP
+                  CYF-BLOG-APP
             </Typography>
+                </Box>
+                  
+                    <Box display="flex" justifyContent="flex-end">
+                  
               <Link to={"/home"} className={classes.link}>
               <Typography variant="body2" className={classes.linkname} >
                 Home
               </Typography>
-            </Link>
+                  </Link>
+                  
             <Link to={"/about"} className={classes.link}>
               <Typography variant="body2" className={classes.linkname}>
                 About Us
@@ -83,8 +95,10 @@ const App = (props) => {
               <Typography variant="body2" className={classes.linkname}>
                   Login
             </Typography>
-                </Link>
-           </Toolbar>
+                  </Link>
+                  </Box>
+              </Toolbar>
+              </Box>
           </AppBar>
           <div>
             < CreateBlogButton />

@@ -5,7 +5,8 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { BlogsContext } from '../Contex/BlogsContext';
+import Box from '@material-ui/core/Box';
+import Rating from '@material-ui/lab/Rating';
     
 const DisplayReview = ({reviews}) => {
   
@@ -17,7 +18,10 @@ const DisplayReview = ({reviews}) => {
   heading: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
-  },
+      },
+  buttonColor: {
+      color:'#ed4343',
+    },
 }));
   const classes = useStyles();
  // console.log("Display review", review);
@@ -31,7 +35,16 @@ const DisplayReview = ({reviews}) => {
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography className={classes.heading}>{review.reviewer_name}</Typography>
+
+            <Typography className={classes.heading}>
+              {review.reviewer_name}
+            </Typography>
+           <Rating
+          value={review.no_of_likes}
+          name="rating"
+              readOnly="true"
+              className={classes.buttonColor}
+        />
           </AccordionSummary>
           <AccordionDetails>
             <Typography>

@@ -1,4 +1,4 @@
-import {useEffect, useState,useRef } from 'react';
+import {useEffect, useState,useRef ,useContext} from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -15,6 +15,7 @@ import RaisedButton from '@material-ui/core';
 import { useParams,useHistory } from 'react-router-dom';
 import { useStyles, makeStyles } from '@material-ui/core/styles';
 import StarIcon from '@material-ui/icons/Star';
+import { BlogsContext } from '../Contex/BlogsContext';
 
 
 
@@ -27,6 +28,7 @@ export default function FormDialog({ open, setOpen }) {
   const { id } = useParams();
   
   const history = useHistory();
+   const { blog, setBlog,reviews,setReviews ,addReviews} = useContext(BlogsContext);
   const [name, setName] = React.useState("");
   const [comment, setComment] = React.useState("");
   const [rating, setRating] = useState(0);
@@ -45,25 +47,23 @@ export default function FormDialog({ open, setOpen }) {
   const handleCommentChange = e => {
     setComment(e.target.value);
   };
-  console.log(setName);
-  console.log(setComment);
+  
   
   const handleSubmitReview = async (event) => {
     try {
-      event.preventDefault();
-      console.log("I am click");
-      console.log("rating from Form Dialog", rating);
-      console.log("name", name);
-      console.log("comment", comment);
-      const response = await client.post(`/getblog/${id}/addReview`, {
+       event.preventDefault();
+        const response = await client.post(`/getblog/${id}/addReview`, {
         reviewerName: name,
         reviewerComment: comment,
         noOfLikes: rating,
         article_id: id
                 
-      })
-      
+        })
       console.log(response);
+      addReviews(response.data.data.review);
+      history.push(`/ShowAllPost/${id}`)
+      
+      
     } catch (error) {
       console.log(error);
     
@@ -136,10 +136,10 @@ export default function FormDialog({ open, setOpen }) {
         </DialogContent>
         <DialogActions>
           <Button className={classes.buttonColor} type="submit" onClick={handleClose} >
-            Cancel
+            Close
         </Button>
           <Button className={classes.buttonColor} type ="submit" onClick={handleSubmitReview}>
-            Create
+            Save
         </Button>
         </DialogActions>
       </form>

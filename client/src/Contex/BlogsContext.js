@@ -5,12 +5,13 @@ export const BlogsContext = createContext();
 export const BlogsContextProvider = props => {
     const [blogs, setBlogs] = useState([]);
     const [reviews, setReviews] = useState([]);
+   
     const [blog, setBlog] = useState([]);
     const addBlogs = (blog) => {
         setBlogs([...blog,blog])
     }
     const addReviews = (review) => {
-        setReview([...reviews,review])
+        setReviews([...reviews,review])
     }
     return (
 
