@@ -200,8 +200,7 @@ router.get('/login', (req, res) => {
 
 // Callback service parsing the authorization token and asking for the access token
 router.get('/callback', async (req, res) => {
-  console.log(req.query);
-  const { code } = req.query;
+   const { code } = req.query;
 
   const options = {
     code,
@@ -219,7 +218,8 @@ router.get('/callback', async (req, res) => {
 
     //this returns the authenticated user's username/login
     const { data } = await octokit.request('/user');
-    return res.status(200).json(data.login);
+
+    return res.status(200).json(data);
   } catch (error) {
     return res.status(500).json('Authentication failed');
   }

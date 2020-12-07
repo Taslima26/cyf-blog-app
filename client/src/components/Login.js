@@ -5,13 +5,18 @@ import axios from 'axios';
 
 const Login = () => {
     const onSuccess = async (response) => {
-        console.log(response);
+       
         const accessCode = response.code;
-         const fetchUserName = (code)=>{
+        const fetchUserName = (code) => {
+             
             return axios.get(`https://cyf-blog-app.herokuapp.com/api/callback?code=${code}`)
-            .then(response => {
-                return response.data
+                 
+                .then(response => {
+                console.log(response);
+                return response.data.login
+                 
             })
+           
         }
         const githubname = await fetchUserName(accessCode);
         
