@@ -30,7 +30,8 @@ const ShowAllPost = (props) => {
             try {
                 var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
                 const response = await client.get("/getall");
-                response.data.data.blogs.forEach(p => p.create_on_date!=null ?p.create_on_date=new  Date(p.create_on_date).toLocaleDateString("en-GB",options) :p.create_on_date= 'no date')
+                response.data.data.blogs.forEach(p => p.create_on_date != null ? p.create_on_date = new Date(p.create_on_date).toLocaleDateString("en-GB", options) : p.create_on_date = 'no date')
+                console.log(response.data.data);
                 setBlogs(response.data.data.blogs);
             }
             catch (error) {
@@ -84,6 +85,7 @@ const ShowAllPost = (props) => {
                      subTitle={tile.sub_title}
                      mainContent={tile.main_content}
                      createdOnDate={tile.create_on_date}
+                     averageRating={tile.average_rating}
                      deletePost={deletePost}
                      handleUpdate={handleUpadte}
                      handleGoToDetailsPage={handleGoToDetailsPage}
