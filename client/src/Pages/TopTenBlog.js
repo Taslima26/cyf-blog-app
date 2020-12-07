@@ -82,47 +82,42 @@ const TopTenBlog = (props) => {
     }));
     const classes = useStyles();
     return (
-        <Container>
-            {/* <Container className={classes.alignHeader}> */}
-            {/* <Typography className={classes.buttonColor} variant="h3" gutterBottom>
+      <Container>
+        {/* <Container className={classes.alignHeader}> */}
+        {/* <Typography className={classes.buttonColor} variant="h3" gutterBottom>
         All Blogs!!!
       </Typography> */}
-                {/* <Button className={classes.buttonColor} size="small"variant="contained"  onClick={handleCreate}>
+        {/* <Button className={classes.buttonColor} size="small"variant="contained"  onClick={handleCreate}>
   Create a blog!!
 </Button> */}
-                {/* </Container> */}
-         <div className={classes.root}>
-            
-             {blogs.map((tile) => (
-        
-                 <Card id={tile.id}
-                     title={tile.title}
-                     subTitle={tile.sub_title}
-                     mainContent={tile.main_content}
-                     createdOnDate={tile.create_on_date}
-                     deletePost={deletePost}
-                     handleUpdate={handleUpadte}
-                     handleGoToDetailsPage={handleGoToDetailsPage}
-                />
-        ))}
-                    
-                    
-                   
-            </div>
-            <div>
-                <Button variant="outlined" className={classes.buttonColor}  onClick={handleShowAllPost}>
-Show All Post
-</Button>
-  
-            </div>
-
-
-   </Container>
-                
-           
-       
-        
-  );
+        {/* </Container> */}
+        <div className={classes.root}>
+          {blogs.map((tile) => (
+            <Card
+              id={tile.id}
+              title={tile.title}
+              subTitle={tile.sub_title}
+              mainContent={tile.main_content}
+              createdOnDate={tile.create_on_date}
+              createdOnDate={tile.create_on_date}
+              averageRating={tile.average_rating}
+              deletePost={deletePost}
+              handleUpdate={handleUpadte}
+              handleGoToDetailsPage={handleGoToDetailsPage}
+            />
+          ))}
+        </div>
+        <div>
+          <Button
+            variant='outlined'
+            className={classes.buttonColor}
+            onClick={handleShowAllPost}
+          >
+            Show All Post
+          </Button>
+        </div>
+      </Container>
+    );
 }
  
 export default TopTenBlog;

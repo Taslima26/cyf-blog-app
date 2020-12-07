@@ -42,6 +42,7 @@ export default function OutlinedCard({
   id,
   handleUpdate,
   handleGoToDetailsPage,
+  count,
 }) {
   console.log(averageRating);
   const classes = useStyles();
@@ -92,18 +93,18 @@ export default function OutlinedCard({
         >
           Delete
         </Button>
-        <IconButton
-          aria-label='add to favorites'
-          className={classes.buttonColor}
-        >
-          <FavoriteIcon />
-        </IconButton>
+       
         <Rating
           value={averageRating}
           name='rating'
           readOnly='true'
           className={classes.buttonColor}
         />
+        <span>
+          <Typography variant='body2' component='p'>
+           Total reviews {count}
+          </Typography>
+        </span>
       </CardActions>
     </Card>
   );

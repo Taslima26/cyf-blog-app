@@ -86,6 +86,7 @@ const ShowAllPost = (props) => {
                      mainContent={tile.main_content}
                      createdOnDate={tile.create_on_date}
                      averageRating={tile.average_rating}
+                     count={tile.count}
                      deletePost={deletePost}
                      handleUpdate={handleUpadte}
                      handleGoToDetailsPage={handleGoToDetailsPage}

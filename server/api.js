@@ -62,27 +62,19 @@ router.get('/getall', async (req, res) => {
 
 router.get('/gettopten', async (req, res) => {
   try {
-    const result = await Connection.query(
-      'SELECT * FROM blog_article ORDER BY create_on_date limit 10'
-    );
+     const blogRatingsData = await Connection.query(
+       'select * from blog_article left join (select article_id, COUNT(*), TRUNC(AVG(no_of_likes),0) as average_rating from blog_review group by article_id) blog_review on blog_article.id = blog_review.article_id order by average_rating desc limit 10;'
+     );
     res.status(200).json({
       status: 'success',
       data: {
-        blogs: result.rows,
+        blogs: blogRatingsData.rows,
       },
     });
-    console.log(result);
+   
   } catch (err) {
     console.log(err);
   }
-});
-//get top 10 articles
-router.get('/gettop', function (req, res) {
-  Connection.query(
-    'select ba.*, (select count(1) from blog_review br where br.article_id=ba.id) as Num_Likes from blog_article ba order by Num_likes limit 10'
-  )
-    .then((result) => res.json(result.rows))
-    .catch((e) => console.error(e));
 });
 
 router.post('/addblog', async (req, res) => {
