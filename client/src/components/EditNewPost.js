@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import client from '../api';
+
 
 const EditNewPost = () => {
   let history = useHistory();

@@ -15,6 +15,8 @@ import Typography from '@material-ui/core/Typography';
 import Fab from '@material-ui/core/Fab';
 import Button from '@material-ui/core/Button';
 import CreateBlogButton from './CreateBlogButton';
+import { AuthContext } from '../App';
+
 
 
 
@@ -22,7 +24,8 @@ import CreateBlogButton from './CreateBlogButton';
 const ShowAllPost = (props) => {
 
     let history = useHistory();
-    const { blogs, setBlogs, addBlogs } = useContext(BlogsContext);
+  const { blogs, setBlogs, addBlogs } = useContext(BlogsContext);
+  const { state, dispatch } = useContext(AuthContext);
   
     
     
@@ -44,22 +47,33 @@ const ShowAllPost = (props) => {
     }, [])
     
 
-    const handleUpadte = (id) => {
-        history.push(`/ShowAllPost/${id}/EditNewPost`)
+  const handleUpadte = (id) => {
+    
+    if (!state.isLoggedIn) {
+      history.push(`/login`);
+    }
+    else {
+      history.push(`/ShowAllPost/${id}/EditNewPost`)
+    }
     }
     const handleGoToDetailsPage = (id) => {
         history.push(`/ShowAllPost/${id}`)
     }
     
-    const deletePost = async (id) => {
-        try {
-            const response = await client.delete(`/deleteblog/${id}`)
-            setBlogs(blogs.filter(blog=>blog.id!==id))
-            console.log(response)
+  const deletePost = async (id) => {
+    if (!state.isLoggedIn) {
+      history.push(`/login`);
+    }
+    else {
+      try {
+        const response = await client.delete(`/deleteblog/${id}`)
+        setBlogs(blogs.filter(blog => blog.id !== id))
+        console.log(response)
             
-        } catch (error) {
-            console.log(error.message);
-        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
     }
     const useStyles = makeStyles((theme) => ({
         buttonColor: {

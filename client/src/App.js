@@ -155,7 +155,7 @@ const App = (props) => {
                 <Route exact path='/top-ten-blogs' component={TopTenBlog} />
                 <Route exact path='/addnewpost' component={AddNewPost} />
                 <Route exact path='/login' component={Login} />
-                <Route exact path='/home' component={Home} />
+                <Route exact path='/home' component={TopTenBlog} />
               </Switch>
 
               <Route
