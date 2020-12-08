@@ -44,7 +44,7 @@ export default function OutlinedCard({
   handleGoToDetailsPage,
   count,
 }) {
-  console.log(averageRating);
+ 
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
 

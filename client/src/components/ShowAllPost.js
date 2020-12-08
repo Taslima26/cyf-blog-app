@@ -24,7 +24,8 @@ const ShowAllPost = (props) => {
     const { blogs, setBlogs, addBlogs } = useContext(BlogsContext);
   
     
-    
+    console.log("Login",isLogin);
+    console.log("token",token)
     useEffect(() => {
         const fetchData = async () => {
             try {

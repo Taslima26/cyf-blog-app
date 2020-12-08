@@ -24,6 +24,7 @@ const TopTenBlog = (props) => {
     let history = useHistory();
     const { blogs, setBlogs, addBlogs } = useContext(BlogsContext);
     
+    
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -101,6 +102,7 @@ const TopTenBlog = (props) => {
               createdOnDate={tile.create_on_date}
               createdOnDate={tile.create_on_date}
               averageRating={tile.average_rating}
+              count={tile.count}
               deletePost={deletePost}
               handleUpdate={handleUpadte}
               handleGoToDetailsPage={handleGoToDetailsPage}
