@@ -133,9 +133,15 @@ const App = (props) => {
                     </Link>
 
                     <Link to={'/Login'} className={classes.link}>
-                      <Typography variant='body2' className={classes.linkname}>
+                      <Button
+                        color='inherit'
+                        className={[
+                          classes.buttonFontSize,
+                         
+                        ]}
+                      >
                         {islogedin ? <Home /> : 'Login'}
-                      </Typography>
+                      </Button>
                     </Link>
                   </Toolbar>
                 </Grid>
