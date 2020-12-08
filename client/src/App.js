@@ -21,8 +21,9 @@ import { Container ,Grid} from '@material-ui/core';
 import CreateBlogButton from './components/CreateBlogButton';
 //import blog from "../src/public/download";
 import Login from './components/Login';
-import Home from './components/Home';
+import Logout from './components/Logout';
 import WhiteImage from './public/whiteImage.jpg';
+import { LocalParkingOutlined } from '@material-ui/icons';
 
 
 export const AuthContext = createContext();
@@ -140,7 +141,7 @@ const App = (props) => {
                          
                         ]}
                       >
-                        {islogedin ? <Home /> : 'Login'}
+                        {islogedin ? <Logout /> : 'Login'}
                       </Button>
                     </Link>
                   </Toolbar>

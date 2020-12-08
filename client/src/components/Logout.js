@@ -7,7 +7,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
 
 
-export default function Home() {
+export default function Logout() {
   const { state, dispatch } = useContext(AuthContext);
 
   if (!state.isLoggedIn) {
@@ -23,7 +23,7 @@ export default function Home() {
 }));
 
 
-  const { avatar_url, name, public_repos, followers, following } = state.user;
+  const { avatar_url, name } = state.user;
 
   const handleLogout = () => {
     dispatch({
@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <div className={classes.root}>
       <Chip
-        avatar={<Avatar alt='Natacha' src={avatar_url} />}
+        avatar={<Avatar alt='Person photo' src={avatar_url} />}
         label={name}
         onDelete={handleLogout}
         variant='outlined'
