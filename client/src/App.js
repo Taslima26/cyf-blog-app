@@ -14,42 +14,64 @@ import DetailBlog from './components/DetailBlog';
 import { initialState, reducer } from './store/reducer/';
 import { createContext, useReducer } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, withStyles } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, withStyles ,Button} from '@material-ui/core';
 import { propTypes } from 'react-bootstrap/esm/Image';
 import logo from './public/cyf_brand.png';
-import { Container } from '@material-ui/core';
+import { Container ,Grid} from '@material-ui/core';
 import CreateBlogButton from './components/CreateBlogButton';
 //import blog from "../src/public/download";
 import Login from './components/Login';
-import { flexbox } from '@material-ui/system';
 import Home from './components/Home';
 import WhiteImage from './public/whiteImage.jpg';
+
 
 export const AuthContext = createContext();
 
 const App = (props) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const useStyles = makeStyles({
-    appBar: {
-      backgroundColor: '#343A40',
-      height: '50px',
-      '& .MuiToolbar-regular': {
-        minHeight: '50px',
-      },
-      // justifyContent: "flex-end",
-      // flexDirection:"row",
+    row: {
+      flexGrow: 1,
     },
-    name: {
-      marginRight: '700px',
+    grow: {
+      flexGrow: 1,
     },
-    link: {
-      textTransform: '#ed4343',
-      color: '#a5a5a5',
-      margin: '0 20px',
-      textDecoration: 'unset',
+    container: {
+      width: 1170,
+      margin: 'auto',
+    },
+    buttonFontSize: {
+      fontSize: '11px',
+      color: '#a1a1a1',
     },
 
-    linkname: {},
+    appBar: {
+      backgroundColor: '#fff',
+      backgroundSize: 'cover',
+    },
+    name: {
+      color: '#a1a1a1',
+      justifyContent: 'left',
+      '&:hover': {
+        background: 'transparent',
+      },
+    },
+    avatar: {
+      height: '100%',
+      borderRadius: 0,
+    },
+
+    loginButton: {
+      background: '#e91e63',
+      color: '#fff',
+      borderRadius: '25px',
+      padding: '0px 25px',
+
+      '&:hover': {
+        background: 'blue',
+        boxShadow: '0px 2px 10px #888888',
+      },
+    },
   });
   const classes = useStyles();
   var islogedin=localStorage.getItem("isLoggedIn")
@@ -74,47 +96,49 @@ const App = (props) => {
                 <img src={logo} style={{ width: 250, marginTop: -7 }} />
               </div>
               <AppBar className={classes.appBar} position='static'>
-                <Box
-                  display='flex'
-                  flexDirection='row'
-                  justifyContent='flex-end'
-                >
+                <Grid item sm={12} xs={12} className={classes.container}>
                   <Toolbar>
-                    <Box display='flex' flexDirection='row'>
+                    <Grid className={classes.grow}>
                       <Typography className={classes.name} variant='h6'>
                         CYF-BLOG-APP
                       </Typography>
-                    </Box>
+                    </Grid>
 
-                    <Box display='flex' justifyContent='flex-end'>
-                      <Link to={'/home'} className={classes.link}>
-                        <Typography
-                          variant='body2'
-                          className={classes.linkname}
-                        >
-                          Home
-                        </Typography>
-                      </Link>
+                    <Link
+                      to={'/home'}
+                      color='inherit'
+                      classes={classes.buttonFontSize}
+                      style={{ textDecoration: 'none' }}
+                    >
+                      <Button
+                        color='inherit'
+                        className={classes.buttonFontSize}
+                      >
+                        Home
+                      </Button>
+                    </Link>
 
-                      <Link to={'/about'} className={classes.link}>
-                        <Typography
-                          variant='body2'
-                          className={classes.linkname}
-                        >
-                          About Us
-                        </Typography>
-                      </Link>
-                      <Link to={'/Login'} className={classes.link}>
-                        <Typography
-                          variant='body2'
-                          className={classes.linkname}
-                        >
-                          {islogedin ? 'Log out' : 'log in'}
-                        </Typography>
-                      </Link>
-                    </Box>
+                    <Link
+                      to={'/about'}
+                      color='inherit'
+                      classes={classes.buttonFontSize}
+                      style={{ textDecoration: 'none' }}
+                    >
+                      <Button
+                        color='inherit'
+                        className={classes.buttonFontSize}
+                      >
+                        About us
+                      </Button>
+                    </Link>
+
+                    <Link to={'/Login'} className={classes.link}>
+                      <Typography variant='body2' className={classes.linkname}>
+                        {islogedin ? <Home /> : 'Login'}
+                      </Typography>
+                    </Link>
                   </Toolbar>
-                </Box>
+                </Grid>
               </AppBar>
               <div>{/* <CreateBlogButton /> */}</div>
 

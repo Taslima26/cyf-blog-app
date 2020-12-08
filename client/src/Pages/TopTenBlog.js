@@ -16,13 +16,17 @@ import Typography from '@material-ui/core/Typography';
 import Fab from '@material-ui/core/Fab';
 import Button from '@material-ui/core/Button';
 import CreateBlogButton from '../components/CreateBlogButton';
+import { AuthContext } from '../App';
+
 
 
 
 const TopTenBlog = (props) => {
 
     let history = useHistory();
-    const { blogs, setBlogs, addBlogs } = useContext(BlogsContext);
+  const { blogs, setBlogs, addBlogs } = useContext(BlogsContext);
+  const { state, dispatch } = useContext(AuthContext);
+   
     
     
     useEffect(() => {
