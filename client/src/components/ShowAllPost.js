@@ -14,6 +14,7 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Fab from '@material-ui/core/Fab';
 import Button from '@material-ui/core/Button';
+import CreateBlogButton from './CreateBlogButton';
 
 
 
@@ -24,8 +25,7 @@ const ShowAllPost = (props) => {
     const { blogs, setBlogs, addBlogs } = useContext(BlogsContext);
   
     
-    console.log("Login",isLogin);
-    console.log("token",token)
+    
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -75,35 +75,26 @@ const ShowAllPost = (props) => {
     }));
     const classes = useStyles();
     return (
-        <Container>
-           
-            <div className={classes.root}>
-            
-             {blogs.map((tile) => (
-        
-                 <Card id={tile.id}
-                     title={tile.title}
-                     subTitle={tile.sub_title}
-                     mainContent={tile.main_content}
-                     createdOnDate={tile.create_on_date}
-                     averageRating={tile.average_rating}
-                     count={tile.count}
-                     deletePost={deletePost}
-                     handleUpdate={handleUpadte}
-                     handleGoToDetailsPage={handleGoToDetailsPage}
-                />
-        ))}
-                    
-                    
-                   
-            </div>
-
-   </Container>
-                
-           
-       
-        
-  );
+      <Container>
+        <div className={classes.root}>
+          <CreateBlogButton />
+          {blogs.map((tile) => (
+            <Card
+              id={tile.id}
+              title={tile.title}
+              subTitle={tile.sub_title}
+              mainContent={tile.main_content}
+              createdOnDate={tile.create_on_date}
+              averageRating={tile.average_rating}
+              count={tile.count}
+              deletePost={deletePost}
+              handleUpdate={handleUpadte}
+              handleGoToDetailsPage={handleGoToDetailsPage}
+            />
+          ))}
+        </div>
+      </Container>
+    );
 }
  
 export default ShowAllPost;

@@ -84,15 +84,8 @@ const TopTenBlog = (props) => {
     const classes = useStyles();
     return (
       <Container>
-        {/* <Container className={classes.alignHeader}> */}
-        {/* <Typography className={classes.buttonColor} variant="h3" gutterBottom>
-        All Blogs!!!
-      </Typography> */}
-        {/* <Button className={classes.buttonColor} size="small"variant="contained"  onClick={handleCreate}>
-  Create a blog!!
-</Button> */}
-        {/* </Container> */}
         <div className={classes.root}>
+          <CreateBlogButton />
           {blogs.map((tile) => (
             <Card
               id={tile.id}

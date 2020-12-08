@@ -9,6 +9,9 @@ export default function Login() {
   const [data, setData] = useState({ errorMessage: '', isLoading: false });
 
   const { client_id, redirect_uri } = state;
+  console.log(data);
+  console.log("state from state",state);
+  console.log("dispatch from dispatch",dispatch);
 
   useEffect(() => {
     // After requesting Github access, Github redirects back to your app with a code parameter
@@ -57,7 +60,7 @@ export default function Login() {
       <section className='container'>
         <div>
           <h1>Welcome</h1>
-          <span>Super amazing app</span>
+          <span>CYF blog app</span>
           <span>{data.errorMessage}</span>
           <div className='login-container'>
             {data.isLoading ? (

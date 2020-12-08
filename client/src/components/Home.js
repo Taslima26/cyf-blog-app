@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import Styled from 'styled-components';
 import { AuthContext } from '../App';
 
+
 export default function Home() {
   const { state, dispatch } = useContext(AuthContext);
 
