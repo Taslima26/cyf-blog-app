@@ -23,6 +23,7 @@ import CreateBlogButton from './components/CreateBlogButton';
 import Login from './components/Login';
 import { flexbox } from '@material-ui/system';
 import Home from './components/Home';
+import WhiteImage from './public/whiteImage.jpg';
 
 export const AuthContext = createContext();
 
@@ -51,6 +52,7 @@ const App = (props) => {
     linkname: {},
   });
   const classes = useStyles();
+  var islogedin=localStorage.getItem("isLoggedIn")
   return (
     <AuthContext.Provider
       value={{
@@ -64,7 +66,7 @@ const App = (props) => {
             <div>
               <div
                 style={{
-                  backgroundImage: `url('/client/src/public/whiteImage.jpg')`,
+                  backgroundImage: `url('${WhiteImage}')`,
                   height: '380px',
                   width: '100%',
                 }}
@@ -107,18 +109,15 @@ const App = (props) => {
                           variant='body2'
                           className={classes.linkname}
                         >
-                          Login
+                          {islogedin ? 'Log out' : 'log in'}
                         </Typography>
                       </Link>
                     </Box>
                   </Toolbar>
                 </Box>
               </AppBar>
-              <div>
-                {/* <CreateBlogButton /> */}
-                
-              </div>
-              
+              <div>{/* <CreateBlogButton /> */}</div>
+
               <Switch>
                 <Route exact path='/' component={TopTenBlog} />
                 {/* <Route exact path='/home' component={TopTenBlog} /> */}
