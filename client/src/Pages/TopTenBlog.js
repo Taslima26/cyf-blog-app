@@ -71,6 +71,7 @@ const TopTenBlog = (props) => {
       try {
         const response = await client.delete(`/deleteblog/${id}`)
         setBlogs(blogs.filter(blog => blog.id !== id))
+        history.push("/");
         console.log(response)
 
       } catch (error) {

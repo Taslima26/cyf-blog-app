@@ -69,6 +69,7 @@ const ShowAllPost = (props) => {
       try {
         const response = await client.delete(`/deleteblog/${id}`)
         setBlogs(blogs.filter(blog => blog.id !== id))
+          history.push('/ShowAllPost');
         console.log(response)
             
       } catch (error) {
