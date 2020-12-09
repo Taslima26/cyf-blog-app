@@ -11,6 +11,11 @@ import Grid from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Rating from '@material-ui/lab/Rating';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 const useStyles = makeStyles({
   root: {
@@ -47,6 +52,16 @@ export default function OutlinedCard({
 }) {
  
   const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const bull = <span className={classes.bullet}>•</span>;
 
   return (
@@ -90,11 +105,34 @@ export default function OutlinedCard({
           variant='outlined'
           className={classes.buttonColor}
           startIcon={<DeleteIcon />}
-          onClick={() => deletePost(id)}
+          onClick={handleClickOpen}
         >
           Delete
         </Button>
-       
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby='alert-dialog-title'
+          aria-describedby='alert-dialog-description'
+        >
+          <DialogTitle id='alert-dialog-title'>
+            {'are you sure you want to delete it?'}
+          </DialogTitle>
+
+          <DialogActions>
+            <Button onClick={handleClose} className={classes.buttonColor}>
+              Disagree
+            </Button>
+            <Button
+              onClick={() => deletePost(id)}
+              className={classes.buttonColor}
+              autoFocus
+            >
+              Agree
+            </Button>
+          </DialogActions>
+        </Dialog>
+
         <Rating
           value={averageRating}
           name='rating'
@@ -103,7 +141,7 @@ export default function OutlinedCard({
         />
         <span>
           <Typography variant='body2' component='p'>
-           Total reviews {count}
+            Total reviews {count}
           </Typography>
         </span>
       </CardActions>

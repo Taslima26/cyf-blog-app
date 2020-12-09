@@ -1,45 +1,51 @@
-import React, {useState, useEffect, Fragment, useRef, useContext} from 'react';
-import {useHistory, useParams} from 'react-router-dom';
+import React, {
+  useState,
+  useEffect,
+  Fragment,
+  useRef,
+  useContext,
+} from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import './AddNewPost.css';
-import {BlogsContext} from '../Contex/BlogsContext';
+import { BlogsContext } from '../Contex/BlogsContext';
 import client from '../api';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../App';
 
-
 const AddNewPost = () => {
-  let history = useHistory ();
-  const [title, setTitle] = useState ('');
-  const [subTitle, setSubTitle] = useState ('');
+  let history = useHistory();
+  const [title, setTitle] = useState('');
+  const [subTitle, setSubTitle] = useState('');
   const [content, setContent] = useState('');
   const { register, errors } = useForm();
-  const getTitle = useRef ();
-  const getsubTitle = useRef ();
-  const getContent = useRef ();
+  const getTitle = useRef();
+  const getsubTitle = useRef();
+  const getContent = useRef();
   //let history = useHistory();
   const { blogs, setBlogs, addBlogs } = useContext(BlogsContext);
   const { state, dispatch } = useContext(AuthContext);
 
-  const userName = state.user.login;
+   const userName = state.isLoggedIn ? state.user.login : "anonomous";
+   console.log(userName);
 
-  const savePost = async event => {
+  const savePost = async (event) => {
     // event.preventDefault();
     try {
-      const response = await client.post ('/addblog', {
+      const response = await client.post('/addblog', {
         title: title,
         sub_title: subTitle,
         main_content: content,
-        user_id:userName
+        user_id: userName,
       });
-      console.log (response);
-      addBlogs (response.data.data.blog);
-      history.push ('/');
+      console.log(response);
+      addBlogs(response.data.data.blog);
+      history.push('/');
     } catch (error) {
-      console.log (error.message);
+      console.log(error.message);
     }
   };
   const goToAllPost = () => {
-    history.push (`/`);
+    history.push(`/`);
   };
   console.log(register);
   return (
@@ -62,6 +68,7 @@ const AddNewPost = () => {
                 required: 'sub title can not be empty',
               })}
             />
+            <span> {errors.title && errors.title.message}</span>
           </div>
 
           <div className='form-group'>
@@ -78,7 +85,7 @@ const AddNewPost = () => {
               className='form-control'
               name='subtitle'
             />
-            {errors.subtitle && 'subtitle is required.'}
+            <span> {errors.subtitle && errors.subtitle.message}</span>
           </div>
 
           <div className='form-group'>
@@ -97,7 +104,7 @@ const AddNewPost = () => {
               rows='4'
               name='maincontent'
             />
-            {errors.maincontent && 'subtitle is required.'}
+            <span> {errors.maincontent && errors.subtitle.maincontent}</span>
           </div>
 
           <div className='form-group'>

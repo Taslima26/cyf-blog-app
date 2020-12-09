@@ -26,8 +26,8 @@ const TopTenBlog = (props) => {
   let history = useHistory();
   const { blogs, setBlogs, addBlogs } = useContext(BlogsContext);
   const { state, dispatch } = useContext(AuthContext);
-   const userName = state.isLoggedIn ? state.user.login : "anonomous";
-   console.log(userName);
+  //  const userName = state.isLoggedIn ? state.user.login : "anonomous";
+  //  console.log(userName);
 
 
   useEffect(() => {
@@ -111,7 +111,7 @@ const TopTenBlog = (props) => {
             createdOnDate={tile.create_on_date}
             createdOnDate={tile.create_on_date}
             averageRating={tile.average_rating}
-            userName={tile.user_name}
+            userName={tile.user_id}
             count={tile.count}
             deletePost={deletePost}
             handleUpdate={handleUpadte}

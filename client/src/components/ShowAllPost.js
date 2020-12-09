@@ -27,8 +27,8 @@ const ShowAllPost = (props) => {
   const { blogs, setBlogs, addBlogs } = useContext(BlogsContext);
   const { state, dispatch } = useContext(AuthContext);
   
-  const userName = state.user.login;
-  console.log(userName);
+  // const userName = state.user.login;
+  // console.log(userName);
     
     useEffect(() => {
         const fetchData = async () => {
@@ -101,11 +101,11 @@ const ShowAllPost = (props) => {
               mainContent={tile.main_content}
               createdOnDate={tile.create_on_date}
               averageRating={tile.average_rating}
+              userName={tile.user_id}
               count={tile.count}
               deletePost={deletePost}
               handleUpdate={handleUpadte}
               handleGoToDetailsPage={handleGoToDetailsPage}
-              userName={tile.user_name}
             />
           ))}
         </div>
