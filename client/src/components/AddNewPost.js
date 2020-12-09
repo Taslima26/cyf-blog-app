@@ -4,6 +4,7 @@ import './AddNewPost.css';
 import {BlogsContext} from '../Contex/BlogsContext';
 import client from '../api';
 import { useForm } from 'react-hook-form';
+import { AuthContext } from '../App';
 
 
 const AddNewPost = () => {
