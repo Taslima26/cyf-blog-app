@@ -26,7 +26,7 @@ const TopTenBlog = (props) => {
   let history = useHistory();
   const { blogs, setBlogs, addBlogs } = useContext(BlogsContext);
   const { state, dispatch } = useContext(AuthContext);
-   const userName = state.user.login;
+   const userName = state.isLoggedIn ? state.user.login : "anonomous";
    console.log(userName);
 
 
