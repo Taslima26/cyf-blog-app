@@ -49,7 +49,7 @@ router.get('/getall', async (req, res) => {
 router.get('/gettopten', async (req, res) => {
   try {
     const blogRatingsData = await Connection.query(
-      'select * from blog_article left join (select article_id, COUNT(*), TRUNC(AVG(no_of_likes),0) as average_rating from blog_review group by article_id) blog_review on blog_article.id = blog_review.article_id order by average_rating desc limit 10;'
+      'select * from blog_article left join (select article_id, COUNT(*), TRUNC(AVG(no_of_likes),0) as average_rating from blog_review group by article_id) blog_review on blog_article.id = blog_review.article_id order by create_on_date desc limit 10;'
     );
     res.status(200).json({
       status: 'success',
