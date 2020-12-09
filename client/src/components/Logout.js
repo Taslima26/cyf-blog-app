@@ -23,7 +23,7 @@ export default function Logout() {
 }));
 
 
-  const { avatar_url, name } = state.user;
+  const { avatar_url, name ,login} = state.user;
 
   const handleLogout = () => {
     dispatch({
@@ -35,7 +35,7 @@ export default function Logout() {
     <div className={classes.root}>
       <Chip
         avatar={<Avatar alt='Person photo' src={avatar_url} />}
-        label={name}
+        label={login}
         onDelete={handleLogout}
         variant='outlined'
       />
