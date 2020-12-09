@@ -27,7 +27,8 @@ const ShowAllPost = (props) => {
   const { blogs, setBlogs, addBlogs } = useContext(BlogsContext);
   const { state, dispatch } = useContext(AuthContext);
   
-    
+  const userName = state.user.name;
+  console.log(userName);
     
     useEffect(() => {
         const fetchData = async () => {
