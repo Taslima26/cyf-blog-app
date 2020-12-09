@@ -62,6 +62,10 @@ export default function OutlinedCard({
     setOpen(false);
   };
 
+  const DeleteItem = (id) => {
+    deletePost(id);
+    handleClose();
+  }
   const bull = <span className={classes.bullet}>•</span>;
 
   return (
@@ -124,7 +128,7 @@ export default function OutlinedCard({
               Disagree
             </Button>
             <Button
-              onClick={() => deletePost(id)}
+              onClick={() => DeleteItem(id)}
               className={classes.buttonColor}
               autoFocus
             >

@@ -69,7 +69,7 @@ const ShowAllPost = (props) => {
       try {
         const response = await client.delete(`/deleteblog/${id}`)
         setBlogs(blogs.filter(blog => blog.id !== id))
-          history.push('/ShowAllPost');
+        history.push('/ShowAllPost');
         console.log(response)
             
       } catch (error) {
@@ -100,7 +100,7 @@ const ShowAllPost = (props) => {
               title={tile.title}
               subTitle={tile.sub_title}
               mainContent={tile.main_content}
-              createdOnDate={tile.create_on_date}
+              createdOnDate={tile.create_on_date}f
               averageRating={tile.average_rating}
               userName={tile.user_id}
               count={tile.count}
