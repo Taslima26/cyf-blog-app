@@ -51,12 +51,12 @@ const AddNewPost = () => {
               id='title'
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              ref={register}
               className='form-control'
               name='title'
-              required
+              ref={register({
+                required: 'sub title can not be empty',
+              })}
             />
-            {errors.title && 'title is required.'}
           </div>
 
           <div className='form-group'>
@@ -67,7 +67,9 @@ const AddNewPost = () => {
               placeholder='Sub-title'
               value={subTitle}
               onChange={(e) => setSubTitle(e.target.value)}
-              ref={register}
+              ref={register({
+                required: 'sub title can not be empty',
+              })}
               className='form-control'
               name='subtitle'
             />
@@ -83,7 +85,9 @@ const AddNewPost = () => {
               type='text'
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              ref={register}
+              ref={register({
+                required: 'content can not be empty',
+              })}
               id='exampleFormControlTextarea1'
               rows='4'
               name='maincontent'
