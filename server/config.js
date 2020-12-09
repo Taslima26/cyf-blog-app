@@ -5,10 +5,10 @@ const path = require('path');
 require('dotenv').config()
 
 const config = {
-  client_id: "f897e1716a41568a5332",
-  redirect_uri:"http://localhost:3000/login" ,
-  client_secret:"1ed7dc6c58bb4e53b3ed8e68a9da415011b567c7" ,
-  proxy_url: "http://localhost:3100/api/authenticate",
+  client_id: 'f897e1716a41568a5332',
+  redirect_uri: 'https://cyf-blog-app.herokuapp.com/login',
+  client_secret: 'f449d163b85ad48ae63cedde8f5263a4e6071809',
+  proxy_url: 'https://cyf-blog-app.herokuapp.com/api/authenticate',
 };
 console.log(config);
 

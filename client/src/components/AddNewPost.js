@@ -3,12 +3,15 @@ import {useHistory, useParams} from 'react-router-dom';
 import './AddNewPost.css';
 import {BlogsContext} from '../Contex/BlogsContext';
 import client from '../api';
+import { useForm } from 'react-hook-form';
+
 
 const AddNewPost = () => {
   let history = useHistory ();
   const [title, setTitle] = useState ('');
   const [subTitle, setSubTitle] = useState ('');
-  const [content, setContent] = useState ('');
+  const [content, setContent] = useState('');
+  const { register, errors } = useForm();
   const getTitle = useRef ();
   const getsubTitle = useRef ();
   const getContent = useRef ();
@@ -33,101 +36,105 @@ const AddNewPost = () => {
   const goToAllPost = () => {
     history.push (`/`);
   };
-
+  console.log(register);
   return (
     <Fragment>
-      <div className="container ">
+      <div className='container '>
+        <form onSubmit={savePost} className='mt-5'>
+          <h3 className='h4 text-center main-header'>Create new post here </h3>
 
-        <form onSubmit={savePost} className="mt-5">
-          <h3 className="h4 text-center main-header">Create new post here </h3>
-
-          <div className="form-group">
-            <label htmlFor="Subject">Subject</label>
+          <div className='form-group'>
+            <label htmlFor='Subject'>Subject</label>
             <input
-              type="text"
-              placeholder="Title"
-              id="title"
+              type='text'
+              placeholder='Title'
+              id='title'
               value={title}
-              onChange={e => setTitle (e.target.value)}
-              ref={getTitle}
-              className="form-control"
+              onChange={(e) => setTitle(e.target.value)}
+              ref={register}
+              className='form-control'
+              name='title'
               required
             />
+            {errors.title && 'title is required.'}
           </div>
 
-          <div className="form-group">
-            <label htmlFor="Subject">Summary</label>
+          <div className='form-group'>
+            <label htmlFor='Subject'>Summary</label>
             <input
-              type="text"
-              id="subTitle"
-              placeholder="Sub-title"
+              type='text'
+              id='subTitle'
+              placeholder='Sub-title'
               value={subTitle}
-              onChange={e => setSubTitle (e.target.value)}
-              ref={getsubTitle}
-              className="form-control"
-              required
+              onChange={(e) => setSubTitle(e.target.value)}
+              ref={register}
+              className='form-control'
+              name='subtitle'
             />
+            {errors.subtitle && 'subtitle is required.'}
           </div>
 
-          <div className="form-group">
-            <label htmlFor="exampleFormControlTextarea1">Blog Content</label>
+          <div className='form-group'>
+            <label htmlFor='exampleFormControlTextarea1'>Blog Content</label>
             <textarea
-              className="form-control"
-              placeholder="content"
+              className='form-control'
+              placeholder='content'
               input
-              type="text"
+              type='text'
               value={content}
-              onChange={e => setContent (e.target.value)}
-              ref={getContent}
-              id="exampleFormControlTextarea1"
-              rows="4"
-              required
+              onChange={(e) => setContent(e.target.value)}
+              ref={register}
+              id='exampleFormControlTextarea1'
+              rows='4'
+              name='maincontent'
             />
+            {errors.maincontent && 'subtitle is required.'}
           </div>
 
-          <div className="form-group">
+          <div className='form-group'>
             <button
-              style={{backgroundColor: 'rgb(237,67,67)', color: 'white'}}
-              type="button"
-              className="save-button btn btn-large"
+              style={{ backgroundColor: 'rgb(237,67,67)', color: 'white' }}
+              type='button'
+              className='save-button btn btn-large'
               onClick={savePost}
-              data-toggle="modal"
-              data-target="#myModal"
+              data-toggle='modal'
+              data-target='#myModal'
+              value='Submit'
             >
               Save!
             </button>
           </div>
         </form>
       </div>
-      <div className="modal fade" id="myModal" role="dialog">
-        <div className="modal-dialog">
-
+      <div className='modal fade' id='myModal' role='dialog'>
+        <div className='modal-dialog'>
           {/* Modal content */}
-          <div className="modal-content">
-            <div className="modal-header">
-              <button type="button" className="close" data-dismiss="modal">
-                &times;&times;
-              </button>
-              <h4 className="modal-title" style={{color: 'rgb(237,67,67)'}}>
+          <div className='modal-content'>
+            <div className='modal-header'>
+              <button
+                type='button'
+                className='close'
+                data-dismiss='modal'
+              ></button>
+              <h4 className='modal-title' style={{ color: 'rgb(237,67,67)' }}>
                 Blog created
               </h4>
             </div>
-            <div className="modal-body">
+            <div className='modal-body'>
               <p>Blogs sucessfully saved.</p>
             </div>
-            <div className="modal-footer">
+            <div className='modal-footer'>
               <button
-                type="button"
-                className="btn"
+                type='button'
+                className='btn'
                 onClick={goToAllPost}
-                style={{backgroundColor: 'rgb(237,67,67)', color: 'white'}}
-                data-dismiss="modal"
+                style={{ backgroundColor: 'rgb(237,67,67)', color: 'white' }}
+                data-dismiss='modal'
               >
                 Close
               </button>
             </div>
           </div>
-
         </div>
       </div>
     </Fragment>
