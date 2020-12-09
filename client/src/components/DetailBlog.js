@@ -91,7 +91,7 @@ const DetailBlog = () => {
                   day: 'numeric',
                 }))
               : (blog.create_on_date = 'no date')}{' '}
-            by Taslima
+            by {blog.user_id}
           </Typography>
           <Typography variant='body2' component='p'>
             {blog.main_content}
