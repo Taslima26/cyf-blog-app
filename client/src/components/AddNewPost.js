@@ -16,7 +16,10 @@ const AddNewPost = () => {
   const getsubTitle = useRef ();
   const getContent = useRef ();
   //let history = useHistory();
-  const {blogs, setBlogs, addBlogs} = useContext (BlogsContext);
+  const { blogs, setBlogs, addBlogs } = useContext(BlogsContext);
+  const { state, dispatch } = useContext(AuthContext);
+
+  const userName = state.user.login;
 
   const savePost = async event => {
     // event.preventDefault();
@@ -25,6 +28,7 @@ const AddNewPost = () => {
         title: title,
         sub_title: subTitle,
         main_content: content,
+        user_id:userName
       });
       console.log (response);
       addBlogs (response.data.data.blog);

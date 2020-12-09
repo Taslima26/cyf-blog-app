@@ -43,6 +43,7 @@ export default function OutlinedCard({
   handleUpdate,
   handleGoToDetailsPage,
   count,
+  userName
 }) {
  
   const classes = useStyles();
@@ -63,7 +64,7 @@ export default function OutlinedCard({
         </Typography>
 
         <Typography variant='body2' component='p'>
-          Created on {createdOnDate}
+          Created on {createdOnDate} by {userName}
         </Typography>
       </CardContent>
       <CardActions>

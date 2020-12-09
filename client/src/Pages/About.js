@@ -58,7 +58,8 @@ const useStyles = makeStyles({
           respect We believe in the equality of all voices We firmly believe
           that through challenge, people can achieve their best We empower our
           students and volunteers, and they represent us Everything we do
-          creates a real impact in the world Image Our Working Principles
+          creates a real impact in the world Image.
+           Our Working Principles
           Empower volunteers through defined roles & responsibilities Events and
           classes with agendas and with assigned leaders running different
           sections Create interactive events that encourage the participation of

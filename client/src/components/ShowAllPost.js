@@ -27,7 +27,7 @@ const ShowAllPost = (props) => {
   const { blogs, setBlogs, addBlogs } = useContext(BlogsContext);
   const { state, dispatch } = useContext(AuthContext);
   
-  const userName = state.user.name;
+  const userName = state.user.login;
   console.log(userName);
     
     useEffect(() => {
@@ -105,6 +105,7 @@ const ShowAllPost = (props) => {
               deletePost={deletePost}
               handleUpdate={handleUpadte}
               handleGoToDetailsPage={handleGoToDetailsPage}
+              userName={tile.user_name}
             />
           ))}
         </div>
