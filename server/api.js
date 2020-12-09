@@ -68,8 +68,8 @@ router.post('/addblog', async (req, res) => {
     let todaysDate = d.toLocaleString();
     console.log(todaysDate);
     const results = await Connection.query(
-      'Insert into blog_article(title,sub_title,main_content,create_on_date) values ($1,$2,$3,$4) returning *',
-      [req.body.title, req.body.sub_title, req.body.main_content, todaysDate]
+      'Insert into blog_article(title,sub_title,main_content,user_id,create_on_date) values ($1,$2,$3,$4,$5) returning *',
+      [req.body.title, req.body.sub_title, req.body.main_content,req.body.user_id, todaysDate]
     );
     console.log(results);
     res.status(201).json({
