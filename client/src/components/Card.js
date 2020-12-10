@@ -36,7 +36,7 @@ const useStyles = makeStyles({
     color: '#ed4343',
   },
 });
-
+console.log("hello")
 export default function OutlinedCard({
   title,
   subTitle,
