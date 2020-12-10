@@ -25,6 +25,7 @@ const DisplayReview = ({reviews}) => {
 }));
   const classes = useStyles();
  // console.log("Display review", review);
+  console.log("hello world")
   return (
   <div className={classes.root}>
       {reviews.map((review) => (

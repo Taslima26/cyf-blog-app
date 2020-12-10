@@ -61,6 +61,7 @@ export default function FormDialog({ open, setOpen }) {
       history.push(`/ShowAllPost/${id}`);
     } catch (error) {
       console.log(error);
+      console.log("hello world")
     }
   };
   const classes = useStyles();

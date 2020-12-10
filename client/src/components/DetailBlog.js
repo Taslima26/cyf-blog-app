@@ -29,6 +29,7 @@ const DetailBlog = () => {
       setBlog(response.data.data.blog);
       setReviews(response.data.data.reviews);
       console.log(response);
+      console.log("hello world")
     };
     fetchData();
   }, []);
