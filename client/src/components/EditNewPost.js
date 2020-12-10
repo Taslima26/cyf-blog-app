@@ -26,7 +26,7 @@ const EditNewPost = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const updatedBlogs = await client.put(
-      `https://cyf-blog-app.herokuapp.com/api/${id}`,
+      `/updateblog/${id}`,
       {
         title: title,
         sub_title: subTitle,
